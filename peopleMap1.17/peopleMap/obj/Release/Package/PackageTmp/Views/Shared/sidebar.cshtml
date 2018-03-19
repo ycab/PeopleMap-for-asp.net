@@ -1,0 +1,288 @@
+﻿<div id="sidebar" class="sidebar                  responsive                    ace-save-state">
+    <script type="text/javascript">
+        try { ace.settings.loadState('sidebar') } catch (e) { };
+      
+
+    </script>
+        <div class="modal fade  bs-example-modal-lg" id="myModalPwd" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span></button>
+                                <h3 class="modal-title" id="myModalLabel">信息提示：</h3>
+                    </div>
+                    <div class="modal-body">
+                        <h4 class="text-center"></h4>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success" data-dismiss="modal">确定</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="sidebar-shortcuts" id="sidebar-shortcuts">
+            <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
+                <button class="btn btn-success">
+                    <i class="ace-icon fa fa-signal"></i>
+                </button>
+
+                <button class="btn btn-info">
+                    <i class="ace-icon fa fa-pencil"></i>
+                </button>
+
+                <button class="btn btn-warning">
+                    <i class="ace-icon fa fa-users"></i>
+                </button>
+
+                <button class="btn btn-danger">
+                    <i class="ace-icon fa fa-cogs"></i>
+                </button>
+            </div>
+
+            <div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
+                <span class="btn btn-success"></span>
+
+                <span class="btn btn-info"></span>
+
+                <span class="btn btn-warning"></span>
+
+                <span class="btn btn-danger"></span>
+            </div>
+        </div><!-- /.sidebar-shortcuts -->
+
+        <ul class="nav nav-list">
+
+            <!--地图展示-->
+            <li>
+                <a href="#" data-iframe="map" onclick="changePage(this)">
+                    <i class="menu-icon fa fa-tachometer"></i>
+                    <span class="menu-text"> world map </span>
+                </a>
+                <b class="arrow"></b>
+            </li>
+
+            <!--人员管理-->
+            <li id="peopleManage" class="">
+                <a href="#" class="dropdown-toggle">
+                    <i class="menu-icon fa fa-desktop"></i>
+                    <span class="menu-text">
+                        人员管理
+                    </span>
+
+                    <b class="arrow fa fa-angle-down"></b>
+                </a>
+
+                <b class="arrow"></b>
+
+                <ul class="submenu">
+
+                    <li id="editpwd" class="">
+                        <a href="#" data-iframe="editPsw" onclick="changePage(this)">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            修改密码
+                        </a>
+
+                        <b class="arrow"></b>
+                    </li>
+
+                    <li id="managerManage" class="">
+                        <a href="#" data-iframe="user" onclick="changePage(this)">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            管理员管理
+                        </a>
+
+                        <b class="arrow"></b>
+                    </li>
+
+                    <li id="userManage" class="">
+                        <a href="#" data-iframe="user2" onclick="changePage(this)">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            用户管理
+                        </a>
+
+                        <b class="arrow"></b>
+                    </li>
+
+
+                </ul>
+            </li>
+
+            <!--数据管理-->
+            <li class="">
+                <a href="#" class="dropdown-toggle">
+                    <i class="menu-icon fa fa-list"></i>
+                    <span class="menu-text"> 数据管理 </span>
+
+                    <b class="arrow fa fa-angle-down"></b>
+                </a>
+
+                <b class="arrow"></b>
+
+                <ul class="submenu">
+                    <li class="">
+                        <a href="#" data-iframe="rank" onclick="changePage(this)">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            数据排行
+                        </a>
+
+                        <b class="arrow"></b>
+                    </li>
+                    <li id="proportion" class="">
+                        <a href="#" data-iframe="editQZ" onclick="changePage(this)">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            权重配置
+                        </a>
+
+                        <b class="arrow"></b>
+                    </li>
+                    <li id="robot" class="">
+                        <a href="#" data-iframe="robot"  onclick="changePage(this)">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            智能机器人
+                            
+                        </a>
+                        @*<b class="arrow"></b>
+                        <ul class="submenu">
+                            <li id="robotsub1" class="">
+                                <a href="#" data-iframe="robotsub1" onclick="changePage(this)">
+                                    <i class="menu-icon fa fa-caret-right"></i>
+                                    测试1类
+                                </a>
+                                <b class="arrow"></b>
+                            </li>
+
+                            <li id="robotsub2" class="">
+                                <a href="#" data-iframe="robotsub2" onclick="changePage(this)">
+                                    <i class="menu-icon fa fa-caret-right"></i>
+                                    测试2类
+                                </a>
+                                <b class="arrow"></b>
+                            </li>
+
+                            <li id="robotsub3" class="">
+                                <a href="#" data-iframe="robotsub3" onclick="changePage(this)">
+                                    <i class="menu-icon fa fa-caret-right"></i>
+                                    测试3类
+                                </a>
+                                <b class="arrow"></b>
+                            </li>
+                        </ul>*@
+                    </li>
+                    <li id="3D" class="">
+                        <a href="#" data-iframe="3D"  onclick="changePage(this)">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            3D打印
+                       
+                        </a>
+                        @*<b class="arrow"></b>
+                        <ul class="submenu">
+                            <li id="3Dsub1" class="">
+                                <a href="#" data-iframe="3Dsub1" onclick="changePage(this)">
+                                    <i class="menu-icon fa fa-caret-right"></i>
+                                    测试1类
+                                </a>
+                                <b class="arrow"></b>
+                            </li>
+
+                            <li id="3Dsub2" class="">
+                                <a href="#" data-iframe="3Dsub2" onclick="changePage(this)">
+                                    <i class="menu-icon fa fa-caret-right"></i>
+                                    测试2类
+                                </a>
+                                <b class="arrow"></b>
+                            </li>
+
+                            <li id="3Dsub3" class="">
+                                <a href="#" data-iframe="3Dsub3" onclick="changePage(this)">
+                                    <i class="menu-icon fa fa-caret-right"></i>
+                                    测试3类
+                                </a>
+                                <b class="arrow"></b>
+                            </li>
+                        </ul>*@
+                    </li>
+                    <li id="CNC" class="">
+                        <a href="#" data-iframe="CNC"  onclick="changePage(this)">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            高档数控机床
+                      
+                        </a>
+                        @*<b class="arrow"></b>
+                        <ul class="submenu">
+                            <li id="CNCsub1" class="">
+                                <a href="#" data-iframe="CNCsub1" onclick="changePage(this)">
+                                    <i class="menu-icon fa fa-caret-right"></i>
+                                    测试1类
+                                </a>
+                                <b class="arrow"></b>
+                            </li>
+
+                            <li id="CNCsub2" class="">
+                                <a href="#" data-iframe="CNCsub2" onclick="changePage(this)">
+                                    <i class="menu-icon fa fa-caret-right"></i>
+                                    测试2类
+                                </a>
+                                <b class="arrow"></b>
+                            </li>
+
+                            <li id="CNCsub3" class="">
+                                <a href="#" data-iframe="CNCsub3" onclick="changePage(this)">
+                                    <i class="menu-icon fa fa-caret-right"></i>
+                                    测试3类
+                                </a>
+                                <b class="arrow"></b>
+                            </li>
+                        </ul>*@
+                    </li>
+                </ul>
+            </li>
+
+
+        </ul>
+
+        <!--侧边栏缩小放大的功能-->
+        <div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
+            <i id="sidebar-toggle-icon" class="ace-icon fa fa-angle-double-left ace-save-state" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
+        </div>
+        <script type="text/javascript">
+            //var id = '<%=Session["userName"] %>';
+            // document.getElementById("editpwd").style.display = "none";
+            //document.getElementById("peopleManage").style.display = "none";
+            document.getElementById("managerManage").style.display = "none";
+            document.getElementById("userManage").style.display = "none";
+
+     
+
+            if ("@Session["Authority"]" == "0") {
+                document.getElementById("userManage").style.display = "inline";
+                document.getElementById("managerManage").style.display = "inline";
+                $("#myModalPwd").modal('show');
+                $("#myModalPwd").find("h4").html("超级管理员登陆！");
+            }
+            else if ("@Session["Authority"]" == "1") {
+                document.getElementById("userManage").style.display = "inline";
+                $("#myModalPwd").modal('show');
+                $("#myModalPwd").find("h4").html("管理员登陆！");
+            }
+            else {
+                document.getElementById("proportion").style.display = "none";
+            }
+            //$.ajax({
+            //    type: 'post',
+            //    url: '/User/GetList',
+            //    data: userinfo,
+            //    success: function (data) {
+            //        if (data == "ok") {
+            //            window.location.href = "/Home/Index";
+            //        }
+            //        else {
+            //            alert("账户或密码错误");
+            //        }
+            //    },
+            //    error: function () {
+            //        alert("error");
+            //    }
+            //});
+        </script>
+    </div>

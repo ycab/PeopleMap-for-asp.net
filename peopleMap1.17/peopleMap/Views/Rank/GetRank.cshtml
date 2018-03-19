@@ -1,0 +1,1262 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta charset="utf-8" />
+    <title>Dashboard - Ace Admin</title>
+
+    <meta name="description" content="overview &amp; stats" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+
+    <!-- 引入bootStrap相关以及字体 -->
+    <link rel="stylesheet" href=@Url.Content("~/assets/css/bootstrap.min.css") />
+    <link rel="stylesheet" href=@Url.Content("~/assets/font-awesome/4.5.0/css/font-awesome.min.css") />
+    <!-- page specific plugin styles -->
+    <link rel="stylesheet" href=@Url.Content("~/assets/css/jquery-ui.min.css") />
+    <link rel="stylesheet" href=@Url.Content("~/assets/css/bootstrap-datepicker3.min.css") />
+    <link rel="stylesheet" href=@Url.Content("~/assets/css/ui.jqgrid.min.css") />
+
+
+
+    <!-- ace styles
+        引入ace框架的主要样式 ace.css -->
+    <link rel="stylesheet" href=@Url.Content("~/assets/css/ace.min.css") class="ace-main-stylesheet" id="main-ace-style" />
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="assets/css/ace-part2.min.css" class="ace-main-stylesheet" />
+    <![endif]-->
+    <link rel="stylesheet" href=@Url.Content("~/assets/css/ace-skins.min.css") />
+    <link rel="stylesheet" href=@Url.Content("~/assets/css/ace-rtl.min.css") />
+
+    <!--[if lte IE 9]>
+      <link rel="stylesheet" href="assets/css/ace-ie.min.css" />
+    <![endif]-->
+    <!-- inline styles related to this page -->
+    <!-- ace settings handler
+        保存cookie信息，例如菜单的展开、皮肤等等 -->
+    <script src=@Url.Content("~/assets/js/ace-extra.min.js")></script>
+    <style>
+        .no-skin {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            background-color: white !important;
+        }
+    </style>
+
+    <!-- HTML5shiv and Respond.js for IE8 to support HTML5 elements and media queries -->
+    <!--[if lte IE 8]>
+    <script src="assets/js/html5shiv.min.js"></script>
+    <script src="assets/js/respond.min.js"></script>
+    <![endif]-->
+
+
+</head>
+
+<body class="no-skin">
+    <!--主体布局 2，3，4，5，6-->
+    <!--主体布局-->
+    <div class="main-content">
+
+        <div class="page-content">
+            <div class="page-header">
+                <h1>
+                    人才信息管理
+                </h1>
+            </div><!-- /.page-header -->
+
+            <div class="two" style="padding-left:97%">
+                <div class="row" style="visibility:hidden;height:0">
+                    <a href="#add_modal" data-toggle="modal" type="button" class="btn btn-sm btn-primary " id="btn-add">新增</a>
+                </div>
+
+            </div>
+             
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="col-xs-6">
+                        <a href=@Url.Content("~/Rank/OutExcel?SSLB=All") target='_blank'>导出Excel</a>
+                    </div>
+                    <div class="col-xs-2">
+                        
+                    </div>
+                    <div id="ImportExcell" class="col-xs-4 " style="display:none;">
+                        <form class="form-inline " role="form" action=@Url.Content("~/Rank/ImportExcel") method="post" id="PeopleDetailForm" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label for="inputfile">Excel导入</label>
+
+
+                            </div>
+                            <div class="form-group">
+
+                                <input type="file" name="file" id="inputfile" required="required" />
+
+                            </div>
+                            <button type="submit" class="btn btn-xs btn-success">提交</button>
+                        </form>
+                    </div>
+                </div>
+            </div><!-- /.row -->
+            <div class="row col-xs-12" >
+                <table id="grid-table"></table>
+
+                <div id="grid-pager"></div>
+            </div>
+            </div><!-- /.page-content -->
+
+    </div>
+    <!-- /.main-content -->
+
+    <div id="detail_modal" class="modal fade" tabindex="-1" style="display: none;">
+        <div class="modal-dialog" style="width:65%;">
+            <div class="modal-content" style="width:100%">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h3 class="smaller lighter blue no-margin" style="padding-right:3%">人才信息详情</h3>
+                </div>
+
+                <div class="page-content" style="height:600px; overflow-x:hidden">
+                    
+                        <div  class="container" style="width:100%;padding-left:3%;padding-right:3%">
+                            <!-- PAGE CONTENT BEGINS -->                           
+
+
+                                        <div class="row">
+                                            <div class="col-md-2 col-lg-2" align="right">
+                                                <h4>所属类别&nbsp;</h4>
+                                            </div>
+                                            <div class="col-md-4 col-lg-4">
+                                                <select name="SSLB" id="SSLB" class="form-control">
+                                                    <option value=""></option>
+                                                    <option value="3D打印">3D打印</option>
+                                                    <option value="智能机器人">智能机器人</option>
+                                                    <option value="高档数控机床">高档数控机床</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-2 col-lg-2" align="right">
+                                                <h4>人才类别&nbsp;</h4>
+                                            </div>
+                                            <div class="col-md-4 col-lg-4">
+                                                <input name="RCLB" id="RCLB" type="text" class="form-control ui-autocomplete-input" autocomplete="off" />
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+
+                                            <div class="col-md-2 col-lg-2" align="right">
+                                                <h4>姓名&nbsp;</h4>
+                                            </div>
+                                            <div class="col-md-4 col-lg-4">
+                                                <input name="RCNAME" id="RCNAME" type="text" class="form-control ui-autocomplete-input" autocomplete="off" />
+                                            </div>
+
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-2 col-lg-2" align="right">
+                                                <h4>性别&nbsp;</h4>
+                                            </div>
+                                            <div class="col-md-4 col-lg-4">
+                                                <select name="SEX" id="SEX" class="form-control text-center">
+                                                    <option value="男">男</option>
+                                                    <option value="女">女</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-2 col-lg-2" align="right">
+                                                <h4>出生日期&nbsp;</h4>
+                                            </div>
+                                            <div class="col-md-4 col-lg-4">
+                                                <input name="BIRTHDAY" id="BIRTHDAY" type="text" class="form-control ui-autocomplete-input" autocomplete="off" />
+                                            </div>
+                                        </div>
+
+                            <div class="row">
+                                <div class="col-md-2 col-lg-2" align="right">
+                                    <h4>所在机构&nbsp;</h4>
+                                </div>
+                                <div class="col-md-10 col-lg-10">
+                                    <input name="SZJG" id="SZJG" type="text" class="form-control ui-autocomplete-input" autocomplete="off" />
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-2 col-lg-2" align="right">
+                                    <h4>国别&nbsp;</h4>
+                                </div>
+                                <div class="col-md-10 col-lg-10">
+                                    <input name="COUNTRY" id="COUNTRY" type="text" class="form-control ui-autocomplete-input" autocomplete="off" />
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-2 col-lg-2" align="right">
+                                    <h4>省&nbsp;</h4>
+                                </div>
+                                <div class="col-md-4 col-lg-4">
+                                    <input name="SF" id="SF" type="text" class="form-control ui-autocomplete-input" autocomplete="off" />
+                                </div>
+                                <div class="col-md-2 col-lg-2" align="right">
+                                    <h4>市&nbsp;</h4>
+                                </div>
+                                <div class="col-md-4 col-lg-4">
+                                    <input name="CITY" id="CITY" type="text" class="form-control ui-autocomplete-input" autocomplete="off" />
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-2 col-lg-2" align="right">
+                                    <h4>职称&nbsp;</h4>
+                                </div>
+                                <div class="col-md-4 col-lg-4">
+                                    <input name="ZC" id="ZC" type="text" class="form-control ui-autocomplete-input" autocomplete="off" />
+                                </div>
+                                <div class="col-md-2 col-lg-2" align="right">
+                                    <h4>职务&nbsp;</h4>
+                                </div>
+                                <div class="col-md-4 col-lg-4">
+                                    <input name="ZW" id="ZW" type="text" class="form-control ui-autocomplete-input" autocomplete="off" />
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-2 col-lg-2" align="right">
+                                    <h4>头衔&nbsp;</h4>
+                                </div>
+                                <div class="col-md-10 col-lg-10">
+                                    <textarea name="TX" id="TX" type="text" class="form-control ui-autocomplete-input" autocomplete="off" style="height:80px;margin-bottom:0.6%"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-2 col-lg-2" align="right">
+                                    <h4>获奖情况&nbsp;</h4>
+                                </div>
+                                <div class="col-md-10 col-lg-10">
+                                    <textarea name="PRICE" id="PRICE" type="text" class="form-control ui-autocomplete-input" autocomplete="off" style="height:80px;margin-bottom:0.6%""></textarea>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-2 col-lg-2" align="right">
+                                    <h4>专利拥有量&nbsp;</h4>
+                                </div>
+                                <div class="col-md-4 col-lg-4">
+
+                                    <div class="ace-spinner middle touch-spinner" style="width: 140px;">
+                                        <div class="input-group">
+                                            <input name="ZLNUMBER" id="ZLNUMBER" type="text" class="input-sm spinbox-input form-control text-center" value="0" />
+                                            <div class="spinbox-buttons input-group-btn">
+                                                <button type="button" class="btn spinbox-up btn-xs " id="num_up">
+                                                    <i class="icon-only  ace-icon ace-icon fa fa-caret-up bigger-110"></i>
+                                                </button>
+                                                <button type="button" class="btn spinbox-down btn-xs " id="num_down">
+                                                    <i class="icon-only  ace-icon ace-icon fa fa-caret-down bigger-110"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-2 col-lg-2" align="right">
+                                    <h4>专利内容&nbsp;</h4>
+                                </div>
+                                <div class="col-md-10 col-lg-10">
+                                    <textarea name="ZLNR" id="ZLNR" type="text" class="form-control ui-autocomplete-input" autocomplete="off" style="height:80px;margin-bottom:0.6%"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-2 col-lg-2" align="right">
+                                    <h4>研究方向&nbsp;</h4>
+                                </div>
+                                <div class="col-md-10 col-lg-10">
+                                    <textarea name="YJFX" id="YJFX" type="text" class="form-control ui-autocomplete-input" autocomplete="off" style="height:80px;margin-bottom:0.6%"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-2 col-lg-2" align="right">
+                                    <h4>人才URL&nbsp;</h4>
+                                </div>
+                                <div class="col-md-10 col-lg-10">
+                                    <input name="RCURL" id="RCURL" type="text" class="form-control ui-autocomplete-input" autocomplete="off" />
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-2 col-lg-2" align="right">
+                                    <h4>常用email&nbsp;</h4>
+                                </div>
+                                <div class="col-md-10 col-lg-10">
+                                    <input name="EMAIL" id="EMAIL" type="text" class="form-control ui-autocomplete-input" autocomplete="off" />
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-2 col-lg-2" align="right">
+                                    <h4>联系电话&nbsp;</h4>
+                                </div>
+                                <div class="col-md-10 col-lg-10">
+                                    <input name="PHONE" id="PHONE" type="text" class="form-control ui-autocomplete-input" autocomplete="off" />
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-2 col-lg-2" align="right">
+                                    <h4>通讯地址&nbsp;</h4>
+                                </div>
+                                <div class="col-md-10 col-lg-10">
+                                    <input name="ADDRESS" id="ADDRESS" type="text" class="form-control ui-autocomplete-input" autocomplete="off" />
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-2 col-lg-2" align="right">
+                                    <h4>备注&nbsp;</h4>
+                                </div>
+                                <div class="col-md-10 col-lg-10">
+                                    <input name="BZ" id="BZ" type="text" class="form-control ui-autocomplete-input" autocomplete="off" />
+                                </div>
+                            </div>
+
+
+                                <button type="button" class="btn btn-sm btn-primary" id="btn-edit" style="margin-left:48.3%">修改</button>
+
+
+                                <br />
+
+
+                            </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+
+    <div id="add_modal" class="modal fade" tabindex="-1" style="display: none;">
+        <div class="modal-dialog" style="width:65%;">
+            <div class="modal-content" style="width:100%">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h3 class="smaller lighter blue no-margin" style="padding-right:3%">人才信息添加</h3>
+                </div>
+
+                <div class="page-content" style="height:600px; overflow-x:hidden;padding-left:3%;padding-right:3%">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <!-- PAGE CONTENT BEGINS -->
+
+        
+
+                            <div class="row">
+                                <div class="col-md-2 col-lg-2" align="right">
+                                    <h4>人才类别&nbsp;</h4>
+                                </div>
+                                <div class="col-md-4 col-lg-4">
+                                    <input name="RCLB" id="RCLB1" type="text" class="form-control ui-autocomplete-input" autocomplete="off" />
+                                </div>
+                                <div class="col-md-2 col-lg-2" align="right">
+                                    <h4>所属类别&nbsp;</h4>
+                                </div>
+                                <div class="col-md-4 col-lg-4">
+
+                                    <select name="SSLB" id="SSLB1" class="form-control">
+                                        <option value="3D打印">3D打印</option>
+                                        <option value="智能机器人">智能机器人</option>
+                                        <option value="高档数控机床">高档数控机床</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-2 col-lg-2" align="right">
+                                    <h4>姓名&nbsp;</h4>
+                                </div>
+                                <div class="col-md-4 col-lg-4">
+                                    <input name="RCNAME" id="RCNAME1" type="text" class="form-control ui-autocomplete-input" autocomplete="off" />
+                                </div>
+
+                             </div>
+
+                            <div class="row">
+                                <div class="col-md-2 col-lg-2" align="right">
+                                    <h4>性别&nbsp;</h4>
+                                </div>
+                                <div class="col-md-4 col-lg-4">
+                                    <select name="SEX" id="SEX1" class="form-control text-center">
+                                        <option value="男">男</option>
+                                        <option value="女">女</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2 col-lg-2" align="right">
+                                    <h4>出生日期&nbsp;</h4>
+                                </div>
+                                <div class="col-md-4 col-lg-4">
+                                    <div style="padding-right:0">
+                                        <div class="input-group input-group-sm">
+                                            <input type="text" name="BIRTHDAY" id="BIRTHDAY1" class="form-control" />
+                                            <span class="input-group-addon">
+                                                <i class="ace-icon fa fa-calendar"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-2 col-lg-2" align="right">
+                                    <h4>所在机构&nbsp;</h4>
+                                </div>
+                                <div class="col-md-10 col-lg-10">
+                                    <input name="SZJG" id="SZJG1" type="text" class="form-control ui-autocomplete-input" autocomplete="off" />
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-2 col-lg-2" align="right">
+                                    <h4>国别&nbsp;</h4>
+                                </div>
+                                <div class="col-md-10 col-lg-10">
+                                    <input name="COUNTRY" id="COUNTRY1" type="text" class="form-control ui-autocomplete-input" autocomplete="off" />
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-2 col-lg-2" align="right">
+                                    <h4>省&nbsp;</h4>
+                                </div>
+                                <div class="col-md-4 col-lg-4">
+                                    <input name="SF" id="SF1" type="text" class="form-control ui-autocomplete-input" autocomplete="off" />
+                                </div>
+                                <div class="col-md-2 col-lg-2" align="right">
+                                    <h4>市&nbsp;</h4>
+                                </div>
+                                <div class="col-md-4 col-lg-4">
+                                    <input name="CITY" id="CITY1" type="text" class="form-control ui-autocomplete-input" autocomplete="off" />
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-2 col-lg-2" align="right">
+                                    <h4>职称&nbsp;</h4>
+                                </div>
+                                <div class="col-md-4 col-lg-4">
+                                    <input name="ZC" id="ZC1" type="text" class="form-control ui-autocomplete-input" autocomplete="off" />
+                                </div>
+                                <div class="col-md-2 col-lg-2" align="right">
+                                    <h4>职务&nbsp;</h4>
+                                </div>
+                                <div class="col-md-4 col-lg-4">
+                                    <input name="ZW" id="ZW1" type="text" class="form-control ui-autocomplete-input" autocomplete="off" />
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-2 col-lg-2" align="right">
+                                    <h4>头衔&nbsp;</h4>
+                                </div>
+                                <div class="col-md-10 col-lg-10">
+                                    <textarea name="TX" id="TX1" type="text" class="form-control ui-autocomplete-input" autocomplete="off" style="height:80px;margin-bottom:0.6%"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-2 col-lg-2" align="right">
+                                    <h4>获奖情况&nbsp;</h4>
+                                </div>
+                                <div class="col-md-10 col-lg-10">
+                                    <textarea name="PRICE" id="PRICE1" type="text" class="form-control ui-autocomplete-input" autocomplete="off" style="height:80px;margin-bottom:0.6%"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-2 col-lg-2" align="right">
+                                    <h4>专利拥有量&nbsp;</h4>
+                                </div>
+                                <div class="col-md-10 col-lg-10">
+
+
+                                    <div class="ace-spinner middle touch-spinner" style="width: 140px;">
+                                        <div class="input-group">
+                                            <input name="ZLNUMBER" id="ZLNUMBER1" type="text" class="input-sm spinbox-input form-control text-center" value="0" />
+                                            <div class="spinbox-buttons input-group-btn">
+                                                <button type="button" class="btn spinbox-up btn-xs " id="num_up1">
+                                                    <i class="icon-only  ace-icon ace-icon fa fa-caret-up bigger-110"></i>
+                                                </button>
+                                                <button type="button" class="btn spinbox-down btn-xs " id="num_down1">
+                                                    <i class="icon-only  ace-icon ace-icon fa fa-caret-down bigger-110"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-2 col-lg-2" align="right">
+                                    <h4>专利内容&nbsp;</h4>
+                                </div>
+                                <div class="col-md-10 col-lg-10">
+                                    <textarea name="ZLNR" id="ZLNR1" type="text" class="form-control ui-autocomplete-input" autocomplete="off" style="height:80px;margin-bottom:0.6%"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-2 col-lg-2" align="right">
+                                    <h4>研究方向&nbsp;</h4>
+                                </div>
+                                <div class="col-md-10 col-lg-10">
+                                    <textarea name="YJFX" id="YJFX1" type="text" class="form-control ui-autocomplete-input" autocomplete="off" style="height:80px;margin-bottom:0.6%"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-2 col-lg-2" align="right">
+                                    <h4>人才URL&nbsp;</h4>
+                                </div>
+                                <div class="col-md-10 col-lg-10">
+                                    <input name="RCURL" id="RCURL1" type="text" class="form-control ui-autocomplete-input" autocomplete="off" />
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-2 col-lg-2" align="right">
+                                    <h4>常用email&nbsp;</h4>
+                                </div>
+                                <div class="col-md-10 col-lg-10">
+                                    <input name="EMAIL" id="EMAIL1" type="text" class="form-control ui-autocomplete-input" autocomplete="off" />
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-2 col-lg-2" align="right">
+                                    <h4>联系电话&nbsp;</h4>
+                                </div>
+                                <div class="col-md-10 col-lg-10">
+                                    <input name="PHONE" id="PHONE1" type="text" class="form-control ui-autocomplete-input" autocomplete="off" />
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-2 col-lg-2" align="right">
+                                    <h4>通讯地址&nbsp;</h4>
+                                </div>
+                                <div class="col-md-10 col-lg-10">
+                                    <input name="ADDRESS" id="ADDRESS1" type="text" class="form-control ui-autocomplete-input" autocomplete="off" />
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-2 col-lg-2" align="right">
+                                    <h4>备注&nbsp;</h4>
+                                </div>
+                                <div class="col-md-10 col-lg-10">
+                                    <input name="BZ" id="BZ1" type="text" class="form-control ui-autocomplete-input" autocomplete="off" />
+                                </div>
+                            </div>
+
+                                <button type="button" class="btn btn-sm btn-primary" id="btn-submit" style="margin-left:48.3%">提交</button>
+
+
+                                <br />
+
+
+                            </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- basic scripts -->
+    <!--[if !IE]> -->
+    <script src=@Url.Content("~/assets/js/jquery-2.1.4.min.js")></script>
+
+    <!-- <![endif]-->
+
+    <script src=@Url.Content("~/assets/js/jquery-1.11.3.min.js")></script>
+
+    <script type="text/javascript">
+    if ('ontouchstart' in document.documentElement) document.write('<script src=@Url.Content("~/assets/js/jquery.mobile.custom.min.js")>' + "<" + "/script>");
+    </script>
+    <script src=@Url.Content("~/assets/js/bootstrap.min.js")></script>
+
+    <!-- page specific plugin scripts -->
+    <!--[if lte IE 8]>
+      <script src="assets/js/excanvas.min.js"></script>
+    <![endif]-->
+    <script src=@Url.Content("~/assets/js/jquery-ui.custom.min.js")></script>
+    <script src=@Url.Content("~/assets/js/jquery.ui.touch-punch.min.js")></script>
+    <script src=@Url.Content("~/assets/js/jquery.easypiechart.min.js")></script>
+    <script src=@Url.Content("~/assets/js/jquery.sparkline.index.min.js")></script>
+    <script src=@Url.Content("~/assets/js/jquery.flot.min.js")></script>
+    <script src=@Url.Content("~/assets/js/jquery.flot.pie.min.js")></script>
+    <script src=@Url.Content("~/assets/js/jquery.flot.resize.min.js")></script>
+
+    <!-- ace scripts -->
+    <script src=@Url.Content("~/assets/js/ace-elements.min.js")></script>
+    <script src=@Url.Content("~/assets/js/ace.min.js")></script>
+
+    <!-- page specific plugin scripts -->
+    <script src=@Url.Content("~/assets/js/bootstrap-datepicker.min.js")></script>
+    <script src=@Url.Content("~/assets/js/jquery.jqGrid.min.js")></script>
+    <script src="~/assets/jqgrid/js/i18n/grid.locale-cn.js"></script>
+    <!-- ace scripts -->
+    <script src=@Url.Content("~/assets/js/ace-elements.min.js")></script>
+    <script src=@Url.Content("~/assets/js/ace.min.js")></script>
+
+
+    <!-- inline scripts related to this page -->
+    <script type="text/javascript">
+
+        $.ajaxSetup({
+            async: false
+        });
+
+        $("#num_up1").on('click', function () {
+            var num = $("#ZLNUMBER1").val();
+            num++;
+            $("#ZLNUMBER1").val(num);
+        });
+        $("#num_down1").on('click', function () {
+            var num = $("#ZLNUMBER1").val();
+            if (num > 0) {
+                num--;
+            }
+            else {
+                alert("专利数不可小于0！");
+            }
+            $("#ZLNUMBER1").val(num);
+        });
+        $("#num_up").on('click', function () {
+            var num = $("#ZLNUMBER").val();
+            num++;
+            $("#ZLNUMBER").val(num);
+        });
+        $("#num_down").on('click', function () {
+            var num = $("#ZLNUMBER").val();
+            if (num > 0) {
+                num--;
+            }
+            else {
+                alert("专利数不可小于0！");
+            }
+            $("#ZLNUMBER").val(num);
+        });
+
+        var title = "人才数据"
+
+        $.fn.datepicker.defaults.format = "yyyy.mm.dd";
+        function fresh() {
+            //title = "降速"
+            var url = '@Url.Content("~/Rank/getAll")';
+            $("#grid-table").jqGrid("setCaption", title);
+            $("#grid-table").jqGrid("setGridParam", { datatype: 'json', url: url }).trigger("reloadGrid");
+        }
+
+        $("#BIRTHDAY1").datepicker({
+
+            showOtherMonths: true,
+            selectOtherMonths: false,
+        });
+        $("#BIRTHDAY").datepicker({
+
+            showOtherMonths: true,
+            selectOtherMonths: false,
+        });
+
+        $("#btn-submit").on('click', function () {//新增信息
+            if ($("#RCNAME1").val() == "" || $("#COUNTRY1").val() == "") {
+                alert("人才姓名和国家为必须输入项！")
+            }
+            else {
+                var ajaxParm = {};
+                ajaxParm.SSLB = $("#SSLB1").val();
+                ajaxParm.RCLB = $("#RCLB1").val();
+                ajaxParm.RCNAME = $("#RCNAME1").val();
+               // ajaxParm.SSZL = $("#SSZL1").val();
+                ajaxParm.SEX = $("#SEX1").val();
+                ajaxParm.BIRTHDAY = $("#BIRTHDAY1").val();
+                ajaxParm.SZJG = $("#SZJG1").val();
+                ajaxParm.COUNTRY = $("#COUNTRY1").val();
+                ajaxParm.SF = $("#SF1").val();
+                ajaxParm.CITY = $("#CITY1").val();
+                ajaxParm.ZC = $("#ZC1").val();
+                ajaxParm.ZW = $("#ZW1").val();
+                ajaxParm.TX = $("#TX1").val();
+                ajaxParm.PRICE = $("#PRICE1").val();
+                ajaxParm.ZLNUMBER = $("#ZLNUMBER1").val();
+                ajaxParm.ZLNR = $("#ZLNR1").val();
+                ajaxParm.YJFX = $("#YJFX1").val();
+                ajaxParm.RCURL = $("#RCURL1").val();
+                ajaxParm.EMAIL = $("#EMAIL1").val();
+                ajaxParm.PHONE = $("#PHONE1").val();
+                ajaxParm.ADDRESS = $("#ADDRESS1").val();
+                ajaxParm.BZ = $("#BZ1").val();
+                var url='@Url.Content("~/Rank/addData")';
+                $.post(url, ajaxParm, function (response) {
+                  
+                    $('#add_modal').modal('hide');
+                    alert("新增成功！");
+                })
+                setTimeout('fresh()', 500);
+            }
+            
+        });
+
+        function look_case_detail(id) {//弹出框详细信息
+            var runNum = 0;
+            //var rowData = $("#grid-table").jqGrid('getRowData', id);
+            //alert(id);
+            var RCID = id.id;
+            //alert(RCID);
+            var ajaxParm={};
+            ajaxParm.RCID = RCID;
+            var url = '@Url.Content("~/Rank/GetTableDataDetail")';
+            $.post(url, ajaxParm, function (response) {
+                $("#RCID").val(response[0].RCID);
+                $("#SSLB").val(response[0].SSLB);
+                $("#RCLB").val(response[0].RCLB);
+                $("#RCNAME").val(response[0].RCNAME);
+               // $("#SSZL").val(response[0].SSZL);
+                $("#SEX").val(response[0].SEX);
+                $("#BIRTHDAY").val(response[0].BIRTHDAY);
+                $("#SZJG").val(response[0].SZJG);
+                $("#COUNTRY").val(response[0].COUNTRY);
+                $("#SF").val(response[0].SF);
+                $("#CITY").val(response[0].CITY);
+                $("#ZC").val(response[0].ZC);
+                $("#ZW").val(response[0].ZW);
+                $("#TX").val(response[0].TX);
+                $("#PRICE").val(response[0].PRICE);
+                $("#ZLNUMBER").val(response[0].ZLNUMBER);
+                $("#ZLNR").val(response[0].ZLNR);
+                $("#YJFX").val(response[0].YJFX);
+                $("#RCURL").val(response[0].RCURL);
+                $("#EMAIL").val(response[0].EMAIL);
+                $("#PHONE").val(response[0].PHONE);
+                $("#ADDRESS").val(response[0].ADDRESS);
+                $("#BZ").val(response[0].BZ);
+            },"json")
+           
+            
+            $("#btn-edit").on('click', function () {//修改详细信息
+                if (runNum == 0) {
+                    ajaxParm.RCID = RCID;
+                    ajaxParm.SSLB = $("#SSLB").val();
+                    ajaxParm.RCLB = $("#RCLB").val();
+                    ajaxParm.RCNAME = $("#RCNAME").val();
+                    //ajaxParm.SSZL = $("#SSZL").val();
+                    ajaxParm.SEX = $("#SEX").val();
+                    ajaxParm.BIRTHDAY = $("#BIRTHDAY").val();
+                    ajaxParm.SZJG = $("#SZJG").val();
+                    ajaxParm.COUNTRY = $("#COUNTRY").val();
+                    ajaxParm.SF = $("#SF").val();
+                    ajaxParm.CITY = $("#CITY").val();
+                    ajaxParm.ZC = $("#ZC").val();
+                    ajaxParm.ZW = $("#ZW").val();
+                    ajaxParm.TX = $("#TX").val();
+                    ajaxParm.PRICE = $("#PRICE").val();
+                    ajaxParm.ZLNUMBER = $("#ZLNUMBER").val();
+                    ajaxParm.ZLNR = $("#ZLNR").val();
+                    ajaxParm.YJFX = $("#YJFX").val();
+                    ajaxParm.RCURL = $("#RCURL").val();
+                    ajaxParm.EMAIL = $("#EMAIL").val();
+                    ajaxParm.PHONE = $("#PHONE").val();
+                    ajaxParm.ADDRESS = $("#ADDRESS").val();
+                    ajaxParm.BZ = $("#BZ").val();
+                    var url1='@Url.Content("~/Rank/Edit_Table")';
+                    $.post(url1, ajaxParm, function (response) {
+                        runNum++;
+                        $("#RCID").val(response[0].RCID);
+                        $("#SSLB").val(response[0].SSLB);
+                        $("#RCLB").val(response[0].RCLB);
+                        $("#RCNAME").val(response[0].RCNAME);
+                        //$("#SSZL").val(response[0].SSZL);
+                        $("#SEX").val(response[0].SEX);
+                        $("#BIRTHDAY").val(response[0].BIRTHDAY);
+                        $("#SZJG").val(response[0].SZJG);
+                        $("#COUNTRY").val(response[0].COUNTRY);
+                        $("#SF").val(response[0].SF);
+                        $("#CITY").val(response[0].CITY);
+                        $("#ZC").val(response[0].ZC);
+                        $("#ZW").val(response[0].ZW);
+                        $("#TX").val(response[0].TX);
+                        $("#PRICE").val(response[0].PRICE);
+                        $("#ZLNUMBER").val(response[0].ZLNUMBER);
+                        $("#ZLNR").val(response[0].ZLNR);
+                        $("#YJFX").val(response[0].YJFX);
+                        $("#RCURL").val(response[0].RCURL);
+                        $("#EMAIL").val(response[0].EMAIL);
+                        $("#PHONE").val(response[0].PHONE);
+                        $("#ADDRESS").val(response[0].ADDRESS);
+                        $("#BZ").val(response[0].BZ);
+                        alert("修改成功！");
+                    })
+                   
+                    $('#detail_modal').modal('hide');
+                    setTimeout('fresh()', 500);
+                    
+                }
+
+            });
+
+        }
+
+        jQuery(function ($) {
+            var grid_selector = "#grid-table";
+            var pager_selector = "#grid-pager";
+
+            var parent_column = $(grid_selector).closest('[class*="col-"]');
+            //resize to fit page size
+            $(window).on('resize.jqGrid', function () {
+                $(grid_selector).jqGrid('setGridWidth', parent_column.width());
+            })
+
+            //resize on sidebar collapse/expand
+            $(document).on('settings.ace.jqGrid', function (ev, event_name, collapsed) {
+                if (event_name === 'sidebar_collapsed' || event_name === 'main_container_fixed') {
+                    //setTimeout is for webkit only to give time for DOM changes and then redraw!!!
+                    setTimeout(function () {
+                        $(grid_selector).jqGrid('setGridWidth', parent_column.width());
+                    }, 20);
+                }
+            })
+
+
+
+            $(grid_selector).jqGrid({
+                url: '@Url.Content("~/Rank/GetAll")',
+                datatype: "json",
+                height: 300,
+                colNames: ['ID', '所属类别', '人才类别', '姓名', '性别', '所在机构', '国别', '职称', '职务', '专利拥有量', '研究方向', '计分', '详情'],         //这里定义表的格式。
+                colModel: [
+                    //{
+                    //    name: 'myac', index: '', width: 80, fixed: true, sortable: false, resize: false,
+                    //    formatter: 'actions',
+                    //    formatoptions: {
+                    //        keys: true,
+                    //        delbutton: false,//disable delete button
+
+                    //        delOptions: { recreateForm: true, beforeShowForm: beforeDeleteCallback },
+                    //        //   editformbutton: true, editOptions: { recreateForm: true, beforeShowForm: beforeEditCallback }
+                    //    }
+                    //},
+
+            { name: 'RCID', index: 'RCID', width: 1, hidden: true, editable: true, key: true },
+            {
+                name: 'SSLB', index: 'SSLB', width: 40, editable: true,
+                editoptions: { size: "20", maxlength: "30" },
+                formoptions: {
+                    rowpos: 2,//editForm时的位置
+                    colpos: 1,
+                }
+            },
+
+            {
+                name: 'RCLB', index: 'RCLB', width: 60, editable: true,
+                editoptions: { size: "20", maxlength: "30" },
+                formoptions: {
+                    rowpos: 2,//editForm时的位置
+                    colpos: 1,
+                }
+            },
+
+            {
+                name: 'RCNAME', index: 'RCNAME', width: 40, editable: true,
+                editoptions: { size: "20", maxlength: "30" },
+                formoptions: {
+                    rowpos: 2,//editForm时的位置
+                    colpos: 2,
+                }
+            },
+            {
+                name: 'SEX',
+                index: 'SEX',
+                width: 90,
+                editable: true,
+                hidden: true,
+                formoptions: {
+                    rowpos: 3,//editForm时的位置
+                    colpos: 1,
+                },
+                editoptions: { size: "20", maxlength: "30" }, editrules: {
+                    required: true,
+                    edithidden: true
+                }
+            },
+            {
+                name: 'SZJG', index: 'SZJG', width: 70, editable: true,
+                editoptions: { size: "20", maxlength: "30" },
+                formoptions: {
+                    rowpos: 4,//editForm时的位置
+                    colpos: 1,
+                },
+            },
+            {
+                name: 'COUNTRY', index: 'COUNTRY', width: 40, editable: true,
+                editoptions: { size: "20", maxlength: "30" },
+                formoptions: {
+                    rowpos: 4,//editForm时的位置
+                    colpos: 2,
+                },
+            },
+            {
+                name: 'ZC', index: 'ZC', width: 30, editable: true,
+                editoptions: { size: "20", maxlength: "30" },
+                formoptions: {
+                    rowpos: 5,//editForm时的位置
+                    colpos: 1,
+                },
+            },
+            {
+                name: 'ZW', index: 'ZW', width: 50, editable: true, editoptions: { size: "20", maxlength: "30" },
+                formoptions: {
+                    rowpos: 5,//editForm时的位置
+                    colpos: 2,
+                },
+            },
+            { name: 'ZLNUMBER', index: 'ZLNUMBER', width: 30, editable: true, editoptions: { size: "20", maxlength: "30" } },
+            { name: 'YJFX', index: 'YJFX', width: 120, editable: true, edittype: "textarea", editoptions: { size: "20", maxlength: "30" } },
+            { name: 'RANK', index: 'RANK', width: 40, editable: false },
+
+            {
+                name: 'myac', index: '', width: 50, fixed: true, sortable: false, resize: false,
+                formatter: function (cellvalue, options, rowObject) {
+                    //return "<a onclick=\"viewInfo()\" style='text-decoration:underline;color:blue'>" + cellvalue + "</a>";
+                    return " <a href=\"#detail_modal\" role=\"button\" class=\"blue\" data-toggle=\"modal\" onclick=\"look_case_detail(" + rowObject.RCID + ")\">" + "详情" + "</a>";
+                }
+            },
+            
+                ],
+                loadonce: true,
+                viewrecords: true,
+                rowNum: 10,
+                rowList: [5, 10, 15],
+                pager: pager_selector,
+                altRows: true,
+                //toppager: true,
+
+                multiselect: true,
+                //multikey: "ctrlKey",
+                multiboxonly: true,
+
+                loadComplete: function () {
+                    var table = this;
+
+                    setTimeout(function () {
+                        styleCheckbox(table);
+                        updateActionIcons(table);
+                        updatePagerIcons(table);
+                        enableTooltips(table);
+                    }, 0);
+                },
+                
+                editurl: '@Url.Content("~/Rank/edit")',//nothing is saved
+                caption: title,
+
+            });
+            $(window).triggerHandler('resize.jqGrid');//trigger window resize to make the grid get the correct size
+
+            $(window).resize(function () {
+                $(window).unbind("onresize");
+                $("#keyword_detail").setGridHeight($(window).height() - 190);
+                $(window).bind("onresize", this);
+            });
+
+            //enable search/filter toolbar
+            // jQuery(grid_selector).jqGrid('filterToolbar',{defaultSearch:true,stringResult:true})
+            //   jQuery(grid_selector).filterToolbar({});
+
+
+            //switch element when editing inline
+            function aceSwitch(cellvalue, options, cell) {
+                setTimeout(function () {
+                    $(cell).find('input[type=checkbox]')
+                        .addClass('ace ace-switch ace-switch-5')
+                        .after('<span class="lbl"></span>');
+                }, 0);
+            }
+
+            //enable datepicker
+            //function pickDate(cellvalue, options, cell) {
+            //    setTimeout(function () {
+            //        $(cell).find('input[type=text]')
+            //            .datepicker({ format: 'yy-mm-dd', autoclose: true });
+            //    }, 0);
+            //}
+
+
+            //navButtons
+            jQuery(grid_selector).jqGrid('navGrid', pager_selector,
+                { 	//navbar options
+                    edit: false,
+                    // editicon: 'ace-icon fa fa-pencil blue',
+                    add: false,
+                    //   addicon: 'ace-icon fa fa-plus-circle purple',
+                    del: true,
+                    delicon: 'ace-icon fa fa-trash-o red',
+                    search: true,
+                    searchicon: 'ace-icon fa fa-search orange',
+                    refresh: true,
+                    refreshicon: 'ace-icon fa fa-refresh green',
+                    view: true,
+                    viewicon: 'ace-icon fa fa-search-plus grey',
+                },
+                {
+                    top: 10,  //位置
+                    left: 200, //位置
+                    height: 580, //大小
+                    width: 750, //大小
+                    //edit record form
+                    closeAfterEdit: true,
+                    //width: 700,
+                    recreateForm: true,
+                    beforeShowForm: function (e) {
+                        var form = $(e[0]);
+                        form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
+                        style_edit_form(form);
+                    }
+                },
+                {
+                    //new record form
+                    //width: 700,
+                    closeAfterAdd: true,
+                    recreateForm: true,
+                    viewPagerButtons: false,
+                    beforeShowForm: function (e) {
+                        var form = $(e[0]);
+                        form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar')
+                        .wrapInner('<div class="widget-header" />')
+                        style_edit_form(form);
+                    }
+                },
+                {
+                    //delete record form
+                    recreateForm: true,
+                    beforeShowForm: function (e) {
+                        var form = $(e[0]);
+                        if (form.data('styled')) return false;
+
+                        form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
+                        style_delete_form(form);
+
+                        form.data('styled', true);
+                    },
+                    closeAfterAdd: true,
+                    afterComplete: function (e) {
+                        alert("删除成功");
+                        fresh();
+                    }
+
+                },
+                {
+                    afterSubmit: function () {
+                        alert(1);
+                    },
+                    //search form
+                    recreateForm: true,
+                    afterShowSearch: function (e) {
+                        var form = $(e[0]);
+                        form.closest('.ui-jqdialog').find('.ui-jqdialog-title').wrap('<div class="widget-header" />')
+                        style_search_form(form);
+                    },
+                    afterRedraw: function () {
+                        style_search_filters($(this));
+                    }
+                    ,
+                    multipleSearch: true,
+                    /**
+                    multipleGroup:true,*/
+                    //showQuery: true
+
+                },
+                {
+                    //view record form
+                    recreateForm: true,
+                    beforeShowForm: function (e) {
+                        var form = $(e[0]);
+                        form.closest('.ui-jqdialog').find('.ui-jqdialog-title').wrap('<div class="widget-header" />')
+                    }
+                }
+            )
+
+            .jqGrid('navButtonAdd', pager_selector, {              //原为).jqgrid   新增
+                buttonicon: 'ace-icon fa fa-plus-circle purple',
+                caption: '',
+                id:"add_record",
+                position: 'last',
+                title: '新增记录',
+                onClickButton: function () {
+                    $('#btn-add').get(0).click();
+            //        fresh();
+                }
+            })
+
+            //隐藏按钮
+            var authority = '@Session["Authority"]';
+        
+          
+            if (authority != "1" && authority != "0") {
+                //alert(authority);
+                $("#btn-edit").hide();
+                $("#add_record").hide();
+                $("#del_grid-table").hide();
+
+    
+            }
+            else
+            {
+                $("#ImportExcell").show();
+            }
+            
+
+
+
+            function style_edit_form(form) {
+                //enable datepicker on "sdate" field and switches for "stock" field
+                form.find('input[name=BIRTHDAY]').datepicker({ format: 'yyyy-mm-dd', autoclose: true })
+
+                form.find('input[name=stock]').addClass('ace ace-switch ace-switch-5').after('<span class="lbl"></span>');
+                //don't wrap inside a label element, the checkbox value won't be submitted (POST'ed)
+                //.addClass('ace ace-switch ace-switch-5').wrap('<label class="inline" />').after('<span class="lbl"></span>');
+
+
+                //update buttons classes
+                var buttons = form.next().find('.EditButton .fm-button');
+                buttons.addClass('btn btn-sm').find('[class*="-icon"]').hide();//ui-icon, s-icon
+                buttons.eq(0).addClass('btn-primary').prepend('<i class="ace-icon fa fa-check"></i>');
+                buttons.eq(1).prepend('<i class="ace-icon fa fa-times"></i>')
+
+                buttons = form.next().find('.navButton a');
+                buttons.find('.ui-icon').hide();
+                buttons.eq(0).append('<i class="ace-icon fa fa-chevron-left"></i>');
+                buttons.eq(1).append('<i class="ace-icon fa fa-chevron-right"></i>');
+            }
+
+            function style_delete_form(form) {
+                var buttons = form.next().find('.EditButton .fm-button');
+                buttons.addClass('btn btn-sm btn-white btn-round').find('[class*="-icon"]').hide();//ui-icon, s-icon
+                buttons.eq(0).addClass('btn-danger').prepend('<i class="ace-icon fa fa-trash-o"></i>');
+                buttons.eq(1).addClass('btn-default').prepend('<i class="ace-icon fa fa-times"></i>')
+            }
+
+            function style_search_filters(form) {
+                form.find('.delete-rule').val('X');
+                form.find('.add-rule').addClass('btn btn-xs btn-primary');
+                form.find('.add-group').addClass('btn btn-xs btn-success');
+                form.find('.delete-group').addClass('btn btn-xs btn-danger');
+            }
+            function style_search_form(form) {
+                var dialog = form.closest('.ui-jqdialog');
+                var buttons = dialog.find('.EditTable')
+                buttons.find('.EditButton a[id*="_reset"]').addClass('btn btn-sm btn-info').find('.ui-icon').attr('class', 'ace-icon fa fa-retweet');
+                buttons.find('.EditButton a[id*="_query"]').addClass('btn btn-sm btn-inverse').find('.ui-icon').attr('class', 'ace-icon fa fa-comment-o');
+                buttons.find('.EditButton a[id*="_search"]').addClass('btn btn-sm btn-purple').find('.ui-icon').attr('class', 'ace-icon fa fa-search');
+            }
+
+            function beforeDeleteCallback(e) {
+                var form = $(e[0]);
+                if (form.data('styled')) return false;
+
+                form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
+                style_delete_form(form);
+
+                form.data('styled', true);
+            }
+
+            function beforeEditCallback(e) {
+                var form = $(e[0]);
+                form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
+                style_edit_form(form);
+            }
+
+
+
+            //it causes some flicker when reloading or navigating grid
+            //it may be possible to have some custom formatter to do this as the grid is being created to prevent this
+            //or go back to default browser checkbox styles for the grid
+            function styleCheckbox(table) {
+                /**
+					$(table).find('input:checkbox').addClass('ace')
+					.wrap('<label />')
+					.after('<span class="lbl align-top" />')
+
+
+					$('.ui-jqgrid-labels th[id*="_cb"]:first-child')
+					.find('input.cbox[type=checkbox]').addClass('ace')
+					.wrap('<label />').after('<span class="lbl align-top" />');
+				*/
+            }
+
+
+            //unlike navButtons icons, action icons in rows seem to be hard-coded
+            //you can change them like this in here if you want
+            function updateActionIcons(table) {
+                /**
+                var replacement =
+                {
+                    'ui-ace-icon fa fa-pencil' : 'ace-icon fa fa-pencil blue',
+                    'ui-ace-icon fa fa-trash-o' : 'ace-icon fa fa-trash-o red',
+                    'ui-icon-disk' : 'ace-icon fa fa-check green',
+                    'ui-icon-cancel' : 'ace-icon fa fa-times red'
+                };
+                $(table).find('.ui-pg-div span.ui-icon').each(function(){
+                    var icon = $(this);
+                    var $class = $.trim(icon.attr('class').replace('ui-icon', ''));
+                    if($class in replacement) icon.attr('class', 'ui-icon '+replacement[$class]);
+                })
+                */
+            }
+
+            //replace icons with FontAwesome icons like above
+            function updatePagerIcons(table) {
+                var replacement =
+                {
+                    'ui-icon-seek-first': 'ace-icon fa fa-angle-double-left bigger-140',
+                    'ui-icon-seek-prev': 'ace-icon fa fa-angle-left bigger-140',
+                    'ui-icon-seek-next': 'ace-icon fa fa-angle-right bigger-140',
+                    'ui-icon-seek-end': 'ace-icon fa fa-angle-double-right bigger-140'
+                };
+                $('.ui-pg-table:not(.navtable) > tbody > tr > .ui-pg-button > .ui-icon').each(function () {
+                    var icon = $(this);
+                    var $class = $.trim(icon.attr('class').replace('ui-icon', ''));
+
+                    if ($class in replacement) icon.attr('class', 'ui-icon ' + replacement[$class]);
+                })
+            }
+
+            function enableTooltips(table) {
+                $('.navtable .ui-pg-button').tooltip({ container: 'body' });
+                $(table).find('.ui-pg-div').tooltip({ container: 'body' });
+            }
+
+            //var selr = jQuery(grid_selector).jqGrid('getGridParam','selrow');
+
+            $(document).one('ajaxloadstart.page', function (e) {
+                $.jgrid.gridDestroy(grid_selector);
+                $('.ui-jqdialog').remove();
+            });
+        });
+
+    </script>
+
+    
+
+</body>
+</html>

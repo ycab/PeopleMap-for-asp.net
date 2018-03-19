@@ -1,0 +1,239 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta charset="utf-8" />
+    <title>Dashboard - Ace Admin</title>
+
+    <meta name="description" content="overview &amp; stats" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+
+    <!-- 引入bootStrap相关以及字体 -->
+    <link rel="stylesheet" href=@Url.Content("~/assets/css/bootstrap.min.css") />
+    <link rel="stylesheet" href=@Url.Content("~/assets/font-awesome/4.5.0/css/font-awesome.min.css") />
+    <!-- page specific plugin styles -->
+    <link rel="stylesheet" href=@Url.Content("~/assets/css/jquery-ui.min.css") />
+    <link rel="stylesheet" href=@Url.Content("~/assets/css/bootstrap-datepicker3.min.css") />
+    <link rel="stylesheet" href=@Url.Content("~/assets/css/ui.jqgrid.min.css") />
+
+    <link rel="stylesheet" href=@Url.Content("~/assets/css/ace.min.css") class="ace-main-stylesheet" id="main-ace-style" />
+    <link rel="stylesheet" href=@Url.Content("~/assets/css/ace-skins.min.css") />
+    <link rel="stylesheet" href=@Url.Content("~/assets/css/ace-rtl.min.css") />
+    <script src=@Url.Content("~/assets/js/ace-extra.min.js")></script>
+    <script src=@Url.Content("~/assets/js/jquery-2.1.4.min.js")></script>
+
+
+    <!--引入echarts-->
+    <script src=@Url.Content("~/assets/echarts/echarts.js")></script>
+    <script src=@Url.Content("~/assets/echarts/world.js")></script>
+    <style>
+        .no-skin {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            background-color: white !important;
+        }
+    </style>
+
+
+
+</head>
+
+<body class="no-skin">
+        <!--主体布局-->
+        <div class="main-content">
+           
+                <div class="page-content">
+                    <!--设置模块-->
+                    <div class="page-header">
+                        <h1>
+                           世界地图
+                        </h1>
+                    </div><!-- /.page-header -->
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <!-- PAGE CONTENT BEGINS -->
+                     <!--   <div class="alert alert-info">
+                                <button class="close" data-dismiss="alert">
+                                    <i class="ace-icon fa fa-times"></i>
+                                </button>
+
+                                <i class="ace-icon fa fa-hand-o-right"></i>
+                                Please note that demo server is not configured to save the changes, therefore you may see an error message.
+                            </div> -->    
+                            <div id="worldMap" style="width: 700px;height:450px;"></div>
+                            <script>
+                                $.ajaxSetup({
+                                    async: false
+                                });
+                                var getData = function (sslb) {
+                                    var data;
+                                    var ajaxPram = {};
+                                    ajaxPram.sslb = sslb;
+                                    var url = '@Url.Content("../Map/getData")';
+                                    $.post(url, ajaxPram, function (response) {
+                                        data=eval(response);
+                                    })
+                                    return data;
+                                }
+                                var allData = function() {
+                                    var datas = {
+                                        data1: getData("智能机器人"),
+                                        data2:getData("3D打印"),
+                                        data3:getData("高档数控机床")
+                                    }
+                                    return datas;
+                                }
+                                var datas = allData();
+                                var myChart = echarts.init(document.getElementById('worldMap'));
+                                var option = option = {
+                                    title: {
+                                        text: '人才分布图',
+                                        subtext: 'NJUST构造',
+                                        sublink: 'http://www.baidu.com',
+                                        left: 'center',
+                                        top: 'top',
+                                    },
+                                    tooltip: {
+                                        trigger: 'item',
+                                        formatter: function (params) {
+                                            //定义一个res变量来保存最终返回的字符结果,并且先把地区名称放到里面
+                                            var res = params.name + '<br />';
+                                            //定义一个变量来保存series数据系列
+                                            var myseries = option.series;
+                                            //循环遍历series数据系列
+                                            for (var i = 0; i < myseries.length; i++) {
+                                                //在内部继续循环series[i],从data中判断：当地区名称等于params.name的时候就将当前数据和名称添加到res中供显示
+                                                for (var k = 0; k < myseries[i].data.length; k++) {
+                                                    //console.log(myseries[i].data[k].name);
+                                                    //如果data数据中的name和地区名称一样
+                                                    if (myseries[i].data[k].name == params.name) {
+                                                        //将series数据系列每一项中的name和数据系列中当前地区的数据添加到res中
+                                                        res += myseries[i].name + ':' + myseries[i].data[k].value + '<br />';
+                                                    }
+                                                }
+                                            }
+                                            //返回res
+                                            //console.log(res);
+                                            return res;
+                                        }
+                                    },
+                                    color: ['#696969', '#696969', '#696969'],
+                                    legend: {
+                                        orient: 'vertical',
+                                        left: 'left',
+                                        data: ['智能机器人', '3D打印','高档数控机床']
+                                    },
+                                    toolbox: {
+                                        show: true,
+                                        orient: 'vertical',
+                                        left: 'right',
+                                        top: 'center',
+                                        feature: {
+                                            dataView: { readOnly: false },
+                                            restore: {},
+                                            saveAsImage: {}
+                                        }
+                                    },
+                                    visualMap: {
+                                        min: 0,
+                                        max: 1000,
+                                        text: ['High', 'Low'],
+                                        bottom: 20,
+                                        itemHeight: 120,
+
+                                        realtime: false,
+                                        calculable: true,
+                                        inRange: {
+                                            color: ['lightskyblue', 'yellow', 'orangered']
+                                        }
+                                    },
+                                    series: [
+                                            {
+                                                name: '智能机器人',
+                                                type: 'map',
+                                                mapType: 'world',
+                                                roam: true,
+                                                itemStyle: {
+                                                    emphasis: { label: { show: true } }
+                                                },
+                                                showLegendSymbol:false,
+                                                data: datas.data1,
+                                            },
+                                             {
+                                                 name: '高档数控机床',
+                                                 type: 'map',
+                                                 mapType: 'world',
+                                                 roam: true,
+                                                 itemStyle: {
+                                                     emphasis: { label: { show: true } }
+                                                 },
+                                                 showLegendSymbol: false,
+                                                 data: datas.data2
+                                             },
+                                             {
+                                                 name: '3D打印',
+                                                 type: 'map',
+                                                 mapType: 'world',
+                                                 roam: true,
+                                                 itemStyle: {
+                                                     emphasis: { label: { show: true } }
+                                                 },
+                                                 showLegendSymbol: false,
+                                                 data: datas.data3
+                                             }
+                                    ]
+                                };
+                                myChart.on('click', function (params) {
+                                    var city = params.name;
+                                    console.log(params.name);
+                                    var urlArr = '@Url.Action("../Map/GetChina")';
+                                    if (params.name == 'China') {
+                                        location.href = urlArr;
+                                    }
+                                });
+                                myChart.setOption(option);
+                            </script>
+                            <div class="hr hr32 hr-dotted"></div>
+                           
+
+                            <!-- PAGE CONTENT ENDS -->
+                        </div><!-- /.col -->
+                    </div><!-- /.row -->
+                </div><!-- /.page-content -->
+        </div><!-- /.main-container -->
+    <!-- basic scripts -->
+    <!--[if !IE]> -->
+   
+
+    <script type="text/javascript">
+        if ('ontouchstart' in document.documentElement) document.write("<script src=@Url.Content("~/assets/js/jquery.mobile.custom.min.js")>" + "<" + "/script>");
+    </script>
+    <script src=@Url.Content("~/assets/js/bootstrap.min.js")></script>
+    <script src=@Url.Content("~/assets/js/jquery-ui.custom.min.js")></script>
+    <script src=@Url.Content("~/assets/js/jquery.ui.touch-punch.min.js")></script>
+    <script src=@Url.Content("~/assets/js/jquery.easypiechart.min.js")></script>
+    <script src=@Url.Content("~/assets/js/jquery.sparkline.index.min.js")></script>
+    <script src=@Url.Content("~/assets/js/jquery.flot.min.js")></script>
+    <script src=@Url.Content("~/assets/js/jquery.flot.pie.min.js")></script>
+    <script src=@Url.Content("~/assets/js/jquery.flot.resize.min.js")></script>
+
+    <!-- ace scripts -->
+    <script src=@Url.Content("~/assets/js/ace-elements.min.js")></script>
+    <script src=@Url.Content("~/assets/js/ace.min.js")></script>
+
+    <!-- page specific plugin scripts -->
+    <script src=@Url.Content("~/assets/js/bootstrap-datepicker.min.js")></script>
+    <script src=@Url.Content("~/assets/js/jquery.jqGrid.min.js")></script>
+    <script src=@Url.Content("~/assets/jqgrid/js/i18n/grid.locale-cn.js")></script>
+    <!-- inline scripts related to this page -->
+    
+   
+</body>
+</html>

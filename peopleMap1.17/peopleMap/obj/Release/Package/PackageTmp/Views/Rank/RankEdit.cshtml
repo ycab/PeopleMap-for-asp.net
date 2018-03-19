@@ -1,0 +1,801 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE HTML PUBLIC "-//W3C//Ddiv XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/Ddiv/xhtml1-transitional.ddiv">
+<html lang="en">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta charset="utf-8" />
+    <title>Dashboard - Ace Admin</title>
+
+    <meta name="description" content="overview &amp; stats" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+
+    <!-- 引入bootStrap相关以及字体 -->
+    <link rel="stylesheet" href=@Url.Content("~/assets/css/bootstrap.min.css") />
+    <link rel="stylesheet" href=@Url.Content("~/assets/font-awesome/4.5.0/css/font-awesome.min.css") />
+    <!-- page specific plugin styles -->
+    <link rel="stylesheet" href=@Url.Content("~/assets/css/jquery-ui.min.css") />
+    <link rel="stylesheet" href=@Url.Content("~/assets/css/bootstrap-datepicker3.min.css") />
+    <link rel="stylesheet" href=@Url.Content("~/assets/css/ui.jqgrid.min.css") />
+
+    <link rel="stylesheet" href=@Url.Content("~/assets/css/fonts.googleapis.com.css" ) />
+
+    <!-- ace styles
+        引入ace框架的主要样式 ace.css -->
+    <link rel="stylesheet" href=@Url.Content("~/assets/css/ace.min.css") class="ace-main-stylesheet" id="main-ace-style" />
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="assets/css/ace-part2.min.css" class="ace-main-stylesheet" />
+    <![endif]-->
+    <link rel="stylesheet" href=@Url.Content("~/assets/css/ace-skins.min.css") />
+    <link rel="stylesheet" href=@Url.Content("~/assets/css/ace-rtl.min.css") />
+
+    <!--[if lte IE 9]>
+      <link rel="stylesheet" href="assets/css/ace-ie.min.css" />
+    <![endif]-->
+    <!-- inline styles related to this page -->
+    <!-- ace settings handler
+        保存cookie信息，例如菜单的展开、皮肤等等 -->
+    <script src=@Url.Content("~/assets/js/ace-extra.min.js")></script>
+    <style>
+        .no-skin {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            background-color: white !important;
+        }
+    </style>
+
+
+    <!-- HTML5shiv and Respond.js for IE8 to support HTML5 elements and media queries -->
+    <!--[if lte IE 8]>
+    <script src="assets/js/html5shiv.min.js"></script>
+    <script src="assets/js/respond.min.js"></script>
+    <![endif]-->
+
+
+</head>
+
+<body class="no-skin">
+    <!--主体布局 2，3，4，5，6-->
+    <!--主体布局-->
+    <div class="main-content">
+
+        <div class="page-content">
+            <div class="page-header">
+                <h1>
+                    权重信息管理
+
+                </h1>
+            </div><!-- /.page-header -->
+
+
+
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <!-- PAGE CONTENT BEGINS -->
+                    <div class="row">
+                        <div class="col-xs-6 col-sm-3 pricing-box">
+                            <div class="widget-box widget-color-dark">
+                                <div class="widget-header">
+                                    <h5 class="widget-title bigger lighter">职称权重</h5>
+                                </div>
+
+                                <div class="widget-body" style="height:65%;align-self:center">
+                                    <div class="widget-main">
+
+                                        <div class="row">
+                                            <div class="col-md-6 col-lg-6" align="right">
+                                                <h4>职称权重&nbsp;</h4>
+                                            </div>
+                                            <div class="col-md-6 col-lg-6">
+                                                @*<input name=" sslb" id="SSLB1" type="text" class="form-control ui-autocomplete-input" autocomplete="off" />*@
+                                                <div class="ace-spinner middle touch-spinner">
+                                                    <div class="input-group">
+                                                        <input name="ZCQZ" id="ZCQZ" type="text" class="input-sm spinbox-input form-control text-center" value="0" />
+                                                        <div class="spinbox-buttons input-group-btn">
+                                                            <button type="button" class="btn spinbox-up btn-xs " data-up="">
+                                                                <i class="icon-only  ace-icon ace-icon fa fa-caret-up bigger-110"></i>
+                                                            </button>
+                                                            <button type="button" class="btn spinbox-down btn-xs " data-down="">
+                                                                <i class="icon-only  ace-icon ace-icon fa fa-caret-down bigger-110"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-6 col-lg-6" align="right">
+                                                <h4>院士&nbsp;</h4>
+                                            </div>
+                                            <div class="col-md-6 col-lg-6">
+                                                @*<input name="SSLB" id="SSLB1" type="text" class="form-control ui-autocomplete-input" autocomplete="off" />*@
+                                                <select name="YS" id="YS" class="form-control">
+                                                    <option value="0">0</option>
+                                                    <option value="0.1">10%</option>
+                                                    <option value="0.2">20%</option>
+                                                    <option value="0.3">30%</option>
+                                                    <option value="0.4">40%</option>
+                                                    <option value="0.5">50%</option>
+                                                    <option value="0.6">60%</option>
+                                                    <option value="0.7">70%</option>
+                                                    <option value="0.8">80%</option>
+                                                    <option value="0.9">90%</option>
+                                                    <option value="1">100%</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-6 col-lg-6" align="right">
+                                                <h4>教授&nbsp;</h4>
+                                            </div>
+                                            <div class="col-md-6 col-lg-6">
+                                                @*<input name="SSLB" id="SSLB1" type="text" class="form-control ui-autocomplete-input" autocomplete="off" />*@
+                                                <select name="JS" id="JS" class="form-control">
+                                                    <option value="0">0</option>
+                                                    <option value="0.1">10%</option>
+                                                    <option value="0.2">20%</option>
+                                                    <option value="0.3">30%</option>
+                                                    <option value="0.4">40%</option>
+                                                    <option value="0.5">50%</option>
+                                                    <option value="0.6">60%</option>
+                                                    <option value="0.7">70%</option>
+                                                    <option value="0.8">80%</option>
+                                                    <option value="0.9">90%</option>
+                                                    <option value="1">100%</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-6 col-lg-6" align="right">
+                                                <h4>副教授&nbsp;</h4>
+                                            </div>
+                                            <div class="col-md-6 col-lg-6">
+                                                @*<input name="SSLB" id="SSLB1" type="text" class="form-control ui-autocomplete-input" autocomplete="off" />*@
+                                                <select name="FJS" id="FJS" class="form-control">
+                                                    <option value="0">0</option>
+                                                    <option value="0.1">10%</option>
+                                                    <option value="0.2">20%</option>
+                                                    <option value="0.3">30%</option>
+                                                    <option value="0.4">40%</option>
+                                                    <option value="0.5">50%</option>
+                                                    <option value="0.6">60%</option>
+                                                    <option value="0.7">70%</option>
+                                                    <option value="0.8">80%</option>
+                                                    <option value="0.9">90%</option>
+                                                    <option value="1">100%</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-6 col-lg-6" align="right">
+                                                <h4>研究员&nbsp;</h4>
+                                            </div>
+                                            <div class="col-md-6 col-lg-6">
+                                                @*<input name="SSLB" id="SSLB1" type="text" class="form-control ui-autocomplete-input" autocomplete="off" />*@
+                                                <select name="YJY" id="YJY" class="form-control">
+                                                    <option value="0">0</option>
+                                                    <option value="0.1">10%</option>
+                                                    <option value="0.2">20%</option>
+                                                    <option value="0.3">30%</option>
+                                                    <option value="0.4">40%</option>
+                                                    <option value="0.5">50%</option>
+                                                    <option value="0.6">60%</option>
+                                                    <option value="0.7">70%</option>
+                                                    <option value="0.8">80%</option>
+                                                    <option value="0.9">90%</option>
+                                                    <option value="1">100%</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-6 col-lg-6" align="right">
+                                                <h4>其他&nbsp;</h4>
+                                            </div>
+                                            <div class="col-md-6 col-lg-6">
+                                                @*<input name="SSLB" id="SSLB1" type="text" class="form-control ui-autocomplete-input" autocomplete="off" />*@
+                                                <select name="QT" id="QT" class="form-control">
+                                                    <option value="0">0</option>
+                                                    <option value="0.1">10%</option>
+                                                    <option value="0.2">20%</option>
+                                                    <option value="0.3">30%</option>
+                                                    <option value="0.4">40%</option>
+                                                    <option value="0.5">50%</option>
+                                                    <option value="0.6">60%</option>
+                                                    <option value="0.7">70%</option>
+                                                    <option value="0.8">80%</option>
+                                                    <option value="0.9">90%</option>
+                                                    <option value="1">100%</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-6 col-sm-3 pricing-box">
+                            <div class="widget-box widget-color-orange">
+                                <div class="widget-header">
+                                    <h5 class="widget-title bigger lighter">头衔权重</h5>
+                                </div>
+
+                                <div class="widget-body" style="height:65%;align-self:center">
+                                    <div class="widget-main">
+
+                                        <div class="row">
+                                            <div class="col-md-6 col-lg-6" align="right">
+                                                <h4>头衔权重&nbsp;</h4>
+                                            </div>
+                                            <div class="col-md-6 col-lg-6">
+                                                @*<input name=" sslb" id="SSLB1" type="text" class="form-control ui-autocomplete-input" autocomplete="off" />*@
+                                                <div class="ace-spinner middle touch-spinner">
+                                                    <div class="input-group">
+                                                        <input name="TXQZ" id="TXQZ" type="text" class="input-sm spinbox-input form-control text-center" value="0" />
+                                                        <div class="spinbox-buttons input-group-btn">
+                                                            <button type="button" class="btn spinbox-up btn-xs " data-up="">
+                                                                <i class="icon-only  ace-icon ace-icon fa fa-caret-up bigger-110"></i>
+                                                            </button>
+                                                            <button type="button" class="btn spinbox-down btn-xs " data-down="">
+                                                                <i class="icon-only  ace-icon ace-icon fa fa-caret-down bigger-110"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-6 col-lg-6" align="right">
+                                                <h4>院士&nbsp;</h4>
+                                            </div>
+                                            <div class="col-md-6 col-lg-6">
+                                                @*<input name="SSLB" id="SSLB1" type="text" class="form-control ui-autocomplete-input" autocomplete="off" />*@
+
+                                                <select name="YS1" id="YS1" class="form-control">
+                                                    <option value="0">0</option>
+                                                    <option value="0.1">10%</option>
+                                                    <option value="0.2">20%</option>
+                                                    <option value="0.3">30%</option>
+                                                    <option value="0.4">40%</option>
+                                                    <option value="0.5">50%</option>
+                                                    <option value="0.6">60%</option>
+                                                    <option value="0.7">70%</option>
+                                                    <option value="0.8">80%</option>
+                                                    <option value="0.9">90%</option>
+                                                    <option value="1">100%</option>
+                                                </select>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-6 col-lg-6" align="right">
+                                                <h4>长江学者&nbsp;</h4>
+                                            </div>
+                                            <div class="col-md-6 col-lg-6">
+                                                @*<input name="SSLB" id="SSLB1" type="text" class="form-control ui-autocomplete-input" autocomplete="off" />*@
+                                                <select name="CJXZ" id="CJXZ" class="form-control">
+                                                    <option value="0">0</option>
+                                                    <option value="0.1">10%</option>
+                                                    <option value="0.2">20%</option>
+                                                    <option value="0.3">30%</option>
+                                                    <option value="0.4">40%</option>
+                                                    <option value="0.5">50%</option>
+                                                    <option value="0.6">60%</option>
+                                                    <option value="0.7">70%</option>
+                                                    <option value="0.8">80%</option>
+                                                    <option value="0.9">90%</option>
+                                                    <option value="1">100%</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-6 col-lg-6" align="right">
+                                                <h4>千人计划&nbsp;</h4>
+                                            </div>
+                                            <div class="col-md-6 col-lg-6">
+                                                @*<input name="SSLB" id="SSLB1" type="text" class="form-control ui-autocomplete-input" autocomplete="off" />*@
+                                                <select name="QRJH" id="QRJH" class="form-control">
+                                                    <option value="0">0</option>
+                                                    <option value="0.1">10%</option>
+                                                    <option value="0.2">20%</option>
+                                                    <option value="0.3">30%</option>
+                                                    <option value="0.4">40%</option>
+                                                    <option value="0.5">50%</option>
+                                                    <option value="0.6">60%</option>
+                                                    <option value="0.7">70%</option>
+                                                    <option value="0.8">80%</option>
+                                                    <option value="0.9">90%</option>
+                                                    <option value="1">100%</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-6 col-lg-6" align="right">
+                                                <h4>杰出青年&nbsp;</h4>
+                                            </div>
+                                            <div class="col-md-6 col-lg-6">
+                                                @*<input name="SSLB" id="SSLB1" type="text" class="form-control ui-autocomplete-input" autocomplete="off" />*@
+                                                <select name="JCQN" id="JCQN" class="form-control">
+                                                    <option value="0">0</option>
+                                                    <option value="0.1">10%</option>
+                                                    <option value="0.2">20%</option>
+                                                    <option value="0.3">30%</option>
+                                                    <option value="0.4">40%</option>
+                                                    <option value="0.5">50%</option>
+                                                    <option value="0.6">60%</option>
+                                                    <option value="0.7">70%</option>
+                                                    <option value="0.8">80%</option>
+                                                    <option value="0.9">90%</option>
+                                                    <option value="1">100%</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-6 col-lg-6" align="right">
+                                                <h4>其他&nbsp;</h4>
+                                            </div>
+                                            <div class="col-md-6 col-lg-6">
+                                                @*<input name="SSLB" id="SSLB1" type="text" class="form-control ui-autocomplete-input" autocomplete="off" />*@
+                                                <select name="QT1" id="QT1" class="form-control">
+                                                    <option value="0">0</option>
+                                                    <option value="0.1">10%</option>
+                                                    <option value="0.2">20%</option>
+                                                    <option value="0.3">30%</option>
+                                                    <option value="0.4">40%</option>
+                                                    <option value="0.5">50%</option>
+                                                    <option value="0.6">60%</option>
+                                                    <option value="0.7">70%</option>
+                                                    <option value="0.8">80%</option>
+                                                    <option value="0.9">90%</option>
+                                                    <option value="1">100%</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-6 col-sm-3 pricing-box">
+                            <div class="widget-box widget-color-blue">
+                                <div class="widget-header">
+                                    <h5 class="widget-title bigger lighter">获奖权重</h5>
+                                </div>
+
+                                <div class="widget-body" style="height:65%;align-self:center">
+                                    <div class="widget-main">
+
+                                        <div class="row">
+                                            <div class="col-md-6 col-lg-6" align="right">
+                                                <h4>获奖权重&nbsp;</h4>
+                                            </div>
+                                            <div class="col-md-6 col-lg-6">
+                                                @*<input name=" sslb" id="SSLB1" type="text" class="form-control ui-autocomplete-input" autocomplete="off" />*@
+                                                <div class="ace-spinner middle touch-spinner">
+                                                    <div class="input-group">
+                                                        <input name="ZWQZ" id="ZWQZ" type="text" class="input-sm spinbox-input form-control text-center" value="0" />
+                                                        <div class="spinbox-buttons input-group-btn">
+                                                            <button type="button" class="btn spinbox-up btn-xs " data-up="">
+                                                                <i class="icon-only  ace-icon ace-icon fa fa-caret-up bigger-110"></i>
+                                                            </button>
+                                                            <button type="button" class="btn spinbox-down btn-xs " data-down="">
+                                                                <i class="icon-only  ace-icon ace-icon fa fa-caret-down bigger-110"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="row" style="visibility:hidden">
+                                            <div class="col-md-6 col-lg-6" align="right">
+                                                <h4>职务计分&nbsp;</h4>
+                                            </div>
+                                            <div class="col-md-6 col-lg-6">
+                                                @*<input name="SSLB" id="SSLB1" type="text" class="form-control ui-autocomplete-input" autocomplete="off" />*@
+                                                <select name="ZWJF" id="ZWJF" class="form-control text-center">
+                                                    <option value="0">0</option>
+                                                    <option value="1">1</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="row" style="visibility:hidden">
+                                            <div class="col-md-6 col-lg-6" align="right">
+                                                <h4>职务权重&nbsp;</h4>
+                                            </div>
+                                            <div class="col-md-6 col-lg-6">
+                                                @*<input name=" sslb" id="SSLB1" type="text" class="form-control ui-autocomplete-input" autocomplete="off" />*@
+                                                <select name="SSLB" id="SSLB1" class="form-control text-center">
+                                                    <option value="0">0</option>
+                                                    <option value="0.1">0.1</option>
+                                                    <option value="0.2">0.2</option>
+                                                    <option value="0.3">0.3</option>
+                                                    <option value="0.4">0.4</option>
+                                                    <option value="0.5">0.5</option>
+                                                    <option value="0.6">0.6</option>
+                                                    <option value="0.7">0.7</option>
+                                                    <option value="0.8">0.8</option>
+                                                    <option value="0.9">0.9</option>
+                                                    <option value="1.0">1.0</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row" style="visibility:hidden">
+                                            <div class="col-md-6 col-lg-6" align="right">
+                                                <h4>职务权重&nbsp;</h4>
+                                            </div>
+                                            <div class="col-md-6 col-lg-6">
+                                                @*<input name=" sslb" id="SSLB1" type="text" class="form-control ui-autocomplete-input" autocomplete="off" />*@
+                                                <select name="SSLB" id="SSLB1" class="form-control">
+                                                    <option value="0">0</option>
+                                                    <option value="0.1">0.1</option>
+                                                    <option value="0.2">0.2</option>
+                                                    <option value="0.3">0.3</option>
+                                                    <option value="0.4">0.4</option>
+                                                    <option value="0.5">0.5</option>
+                                                    <option value="0.6">0.6</option>
+                                                    <option value="0.7">0.7</option>
+                                                    <option value="0.8">0.8</option>
+                                                    <option value="0.9">0.9</option>
+                                                    <option value="1.0">1.0</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row" style="visibility:hidden">
+                                            <div class="col-md-6 col-lg-6" align="right">
+                                                <h4>职务权重&nbsp;</h4>
+                                            </div>
+                                            <div class="col-md-6 col-lg-6">
+                                                @*<input name=" sslb" id="SSLB1" type="text" class="form-control ui-autocomplete-input" autocomplete="off" />*@
+                                                <select name="SSLB" id="SSLB1" class="form-control">
+                                                    <option value="0">0</option>
+                                                    <option value="0.1">0.1</option>
+                                                    <option value="0.2">0.2</option>
+                                                    <option value="0.3">0.3</option>
+                                                    <option value="0.4">0.4</option>
+                                                    <option value="0.5">0.5</option>
+                                                    <option value="0.6">0.6</option>
+                                                    <option value="0.7">0.7</option>
+                                                    <option value="0.8">0.8</option>
+                                                    <option value="0.9">0.9</option>
+                                                    <option value="1.0">1.0</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row" style="visibility:hidden">
+                                            <div class="col-md-6 col-lg-6" align="right">
+                                                <h4>职务权重&nbsp;</h4>
+                                            </div>
+                                            <div class="col-md-6 col-lg-6">
+                                                @*<input name=" sslb" id="SSLB1" type="text" class="form-control ui-autocomplete-input" autocomplete="off" />*@
+                                                <select name="SSLB" id="SSLB1" class="form-control">
+                                                    <option value="0">0</option>
+                                                    <option value="0.1">0.1</option>
+                                                    <option value="0.2">0.2</option>
+                                                    <option value="0.3">0.3</option>
+                                                    <option value="0.4">0.4</option>
+                                                    <option value="0.5">0.5</option>
+                                                    <option value="0.6">0.6</option>
+                                                    <option value="0.7">0.7</option>
+                                                    <option value="0.8">0.8</option>
+                                                    <option value="0.9">0.9</option>
+                                                    <option value="1.0">1.0</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-6 col-sm-3 pricing-box">
+                            <div class="widget-box widget-color-green">
+                                <div class="widget-header">
+                                    <h5 class="widget-title bigger lighter">专利权重</h5>
+                                </div>
+
+                                <div class="widget-body" style="height:65%;align-self:center">
+                                    <div class="widget-main">
+
+                                        <div class="row">
+                                            <div class="col-md-6 col-lg-6" align="right">
+                                                <h4>专利权重&nbsp;</h4>
+                                            </div>
+                                            <div class="col-md-6 col-lg-6">
+                                                @*<input name=" sslb" id="SSLB1" type="text" class="form-control ui-autocomplete-input" autocomplete="off" />*@
+                                                <div class="ace-spinner middle touch-spinner">
+                                                    <div class="input-group">
+                                                        <input name="ZLQZ" id="ZLQZ" type="text" class="input-sm spinbox-input form-control text-center" value="0" />
+                                                        <div class="spinbox-buttons input-group-btn">
+                                                            <button type="button" class="btn spinbox-up btn-xs " data-up="">
+                                                                <i class="icon-only  ace-icon ace-icon fa fa-caret-up bigger-110"></i>
+                                                            </button>
+                                                            <button type="button" class="btn spinbox-down btn-xs " data-down="">
+                                                                <i class="icon-only  ace-icon ace-icon fa fa-caret-down bigger-110"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="row" style="visibility:hidden">
+                                            <div class="col-md-6 col-lg-6" align="right">
+                                                <h4>专利计分&nbsp;</h4>
+                                            </div>
+                                            <div class="col-md-6 col-lg-6">
+                                                @*<input name="SSLB" id="SSLB1" type="text" class="form-control ui-autocomplete-input" autocomplete="off" />*@
+                                                <select name="ZLJF" id="ZLJF" class="form-control">
+                                                    <option value="0">0</option>
+                                                    <option value="1">1</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="row" style="visibility:hidden">
+                                            <div class="col-md-6 col-lg-6" align="right">
+                                                <h4>职务权重&nbsp;</h4>
+                                            </div>
+                                            <div class="col-md-6 col-lg-6">
+                                                @*<input name=" sslb" id="SSLB1" type="text" class="form-control ui-autocomplete-input" autocomplete="off" />*@
+                                                <select name="SSLB" id="SSLB1" class="form-control">
+                                                    <option value="0">0</option>
+                                                    <option value="0.1">0.1</option>
+                                                    <option value="0.2">0.2</option>
+                                                    <option value="0.3">0.3</option>
+                                                    <option value="0.4">0.4</option>
+                                                    <option value="0.5">0.5</option>
+                                                    <option value="0.6">0.6</option>
+                                                    <option value="0.7">0.7</option>
+                                                    <option value="0.8">0.8</option>
+                                                    <option value="0.9">0.9</option>
+                                                    <option value="1.0">1.0</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row" style="visibility:hidden">
+                                            <div class="col-md-6 col-lg-6" align="right">
+                                                <h4>职务权重&nbsp;</h4>
+                                            </div>
+                                            <div class="col-md-6 col-lg-6">
+                                                @*<input name=" sslb" id="SSLB1" type="text" class="form-control ui-autocomplete-input" autocomplete="off" />*@
+                                                <select name="SSLB" id="SSLB1" class="form-control">
+                                                    <option value="0">0</option>
+                                                    <option value="0.1">0.1</option>
+                                                    <option value="0.2">0.2</option>
+                                                    <option value="0.3">0.3</option>
+                                                    <option value="0.4">0.4</option>
+                                                    <option value="0.5">0.5</option>
+                                                    <option value="0.6">0.6</option>
+                                                    <option value="0.7">0.7</option>
+                                                    <option value="0.8">0.8</option>
+                                                    <option value="0.9">0.9</option>
+                                                    <option value="1.0">1.0</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row" style="visibility:hidden">
+                                            <div class="col-md-6 col-lg-6" align="right">
+                                                <h4>职务权重&nbsp;</h4>
+                                            </div>
+                                            <div class="col-md-6 col-lg-6">
+                                                @*<input name=" sslb" id="SSLB1" type="text" class="form-control ui-autocomplete-input" autocomplete="off" />*@
+                                                <select name="SSLB" id="SSLB1" class="form-control">
+                                                    <option value="0">0</option>
+                                                    <option value="0.1">0.1</option>
+                                                    <option value="0.2">0.2</option>
+                                                    <option value="0.3">0.3</option>
+                                                    <option value="0.4">0.4</option>
+                                                    <option value="0.5">0.5</option>
+                                                    <option value="0.6">0.6</option>
+                                                    <option value="0.7">0.7</option>
+                                                    <option value="0.8">0.8</option>
+                                                    <option value="0.9">0.9</option>
+                                                    <option value="1.0">1.0</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row" style="visibility:hidden">
+                                            <div class="col-md-6 col-lg-6" align="right">
+                                                <h4>职务权重&nbsp;</h4>
+                                            </div>
+                                            <div class="col-md-6 col-lg-6">
+                                                @*<input name=" sslb" id="SSLB1" type="text" class="form-control ui-autocomplete-input" autocomplete="off" />*@
+                                                <select name="SSLB" id="SSLB1" class="form-control">
+                                                    <option value="0">0</option>
+                                                    <option value="0.1">0.1</option>
+                                                    <option value="0.2">0.2</option>
+                                                    <option value="0.3">0.3</option>
+                                                    <option value="0.4">0.4</option>
+                                                    <option value="0.5">0.5</option>
+                                                    <option value="0.6">0.6</option>
+                                                    <option value="0.7">0.7</option>
+                                                    <option value="0.8">0.8</option>
+                                                    <option value="0.9">0.9</option>
+                                                    <option value="1.0">1.0</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br>
+                    <br>
+                    <br>
+
+                    <div style="margin-left:48.3%">
+                        <button type="button" class="btn btn-sm btn-primary" id="btn-submit">修改</button>
+                    </div>
+
+                    <div class="space-24"></div>
+
+
+                    <!-- PAGE CONTENT ENDS -->
+                </div><!-- /.col -->
+            </div>
+
+
+        </div><!-- /.page-content -->
+
+    </div>
+    <!-- /.main-content -->
+    <!-- basic scripts -->
+    <!--[if !IE]> -->
+    <script src=@Url.Content("~/assets/js/jquery-2.1.4.min.js")></script>
+
+    <!-- <![endif]-->
+
+    <script src="../assets/js/jquery-1.11.3.min.js"></script>
+
+    <script type="text/javascript">
+        if ('ontouchstart' in document.documentElement) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
+    </script>
+    <script src=@Url.Content("~/assets/js/bootstrap.min.js")></script>
+
+    <!-- page specific plugin scripts -->
+    <!--[if lte IE 8]>
+      <script src="assets/js/excanvas.min.js"></script>
+    <![endif]-->
+    <script src=@Url.Content("~/assets/js/jquery-ui.custom.min.js")></script>
+    <script src=@Url.Content("~/assets/js/jquery.ui.touch-punch.min.js")></script>
+    <script src=@Url.Content("~/assets/js/jquery.easypiechart.min.js")></script>
+    <script src=@Url.Content("~/assets/js/jquery.sparkline.index.min.js")></script>
+    <script src=@Url.Content("~/assets/js/jquery.flot.min.js")></script>
+    <script src=@Url.Content("~/assets/js/jquery.flot.pie.min.js")></script>
+    <script src=@Url.Content("~/assets/js/jquery.flot.resize.min.js")></script>
+
+    <!-- ace scripts -->
+    <script src=@Url.Content("~/assets/js/ace-elements.min.js")></script>
+    <script src=@Url.Content("~/assets/js/ace.min.js")></script>
+
+    <!-- page specific plugin scripts -->
+    <script src=@Url.Content("~/assets/js/bootstrap-datepicker.min.js")></script>
+    <script src=@Url.Content("~/assets/js/jquery.jqGrid.min.js")></script>
+    <script src="~/assets/jqgrid/js/i18n/grid.locale-cn.js"></script>
+    <!-- ace scripts -->
+    <script src=@Url.Content("~/assets/js/ace-elements.min.js")></script>
+    <script src=@Url.Content("~/assets/js/ace.min.js")></script>
+
+
+    <!-- inline scripts related to this page -->
+    <script type="text/javascript">
+        $("button[data-up='']").on('click', function () {
+            var input = $(this).parent().siblings("input");
+            var num = input.val();
+            num++;
+            input.val(num);
+        });
+        $("button[data-down='']").on('click', function () {
+            var input = $(this).parent().siblings("input");
+            var num = input.val();
+            if (num > 0) {
+                num--;
+            }
+            else {
+                alert("不可小于0！");
+            }
+            input.val(num);
+        });
+        $("#btn-submit").on('click', function () {//修改权重
+            var ajaxParm = {};
+            ajaxParm.ZCQZ = $("#ZCQZ").val();
+            ajaxParm.YS = $("#YS").val();
+            ajaxParm.JS = $("#JS").val();
+            ajaxParm.FJS = $("#FJS").val();
+            ajaxParm.YJY = $("#YJY").val();
+            ajaxParm.QT = $("#QT").val();
+
+            ajaxParm.TXQZ = $("#TXQZ").val();
+            ajaxParm.YS1 = $("#YS1").val();
+            ajaxParm.CJXZ = $("#CJXZ").val();
+            ajaxParm.QRJH = $("#QRJH").val();
+            ajaxParm.JCQN = $("#JCQN").val();
+            ajaxParm.QT1 = $("#QT1").val();
+
+            ajaxParm.ZWQZ = $("#ZWQZ").val();
+            ajaxParm.ZWJF = $("#ZWJF").val();
+
+            ajaxParm.ZLQZ = $("#ZLQZ").val();
+            ajaxParm.ZLJF = $("#ZLJF").val();
+
+            var a = parseFloat(ajaxParm.ZCQZ);
+            var b = parseFloat(ajaxParm.TXQZ);
+            var c = parseFloat(ajaxParm.ZWQZ);
+            var d = parseFloat(ajaxParm.ZLQZ);
+
+            if ((a + b + c + d) < parseFloat(99.999) || (a + b + c + d) > parseFloat(100)) {
+                alert("各项权重之和不为100！");
+            }
+            else {
+                var url = '@Url.Content("~/Rank/qzEdit")';
+                $.post(url, ajaxParm, function (response) {
+
+                    alert("修改成功");
+
+                })
+            }
+
+        });
+
+        var url1 = '@Url.Content("~/Rank/getRankSet")';
+        $.post(url1, function (response) {//显示权重信息
+
+            $("#ZCQZ").val(response[8].QZ);
+            $("#YS").val(response[0].QZ);
+            $("#JS").val(response[1].QZ);
+            $("#FJS").val(response[2].QZ);
+            $("#YJY").val(response[3].QZ);
+            $("#QT").val(response[12].QZ);
+
+            $("#TXQZ").val(response[10].QZ);
+            $("#YS1").val(response[13].QZ);
+            $("#CJXZ").val(response[4].QZ);
+            $("#QRJH").val(response[5].QZ);
+            $("#JCQN").val(response[6].QZ);
+            $("#QT1").val(response[14].QZ);
+
+            $("#ZWQZ").val(response[9].QZ);
+            $("#ZWJF").val(response[15].QZ);
+
+            $("#ZLQZ").val(response[11].QZ);
+            $("#ZLJF").val(response[7].QZ);
+        }, "json")
+
+
+    </script>
+
+
+
+</body>
+</html>

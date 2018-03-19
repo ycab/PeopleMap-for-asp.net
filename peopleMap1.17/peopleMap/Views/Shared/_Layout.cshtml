@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>全球智能制造人才展示</title>
+
+    @Scripts.Render("~/bundles/modernizr")
+
+    @*css*@
+    <link rel="stylesheet" href=@Url.Content("~/assets/css/bootstrap.min.css") />
+    <link rel="stylesheet" href=@Url.Content("~/assets/font-awesome/4.5.0/css/font-awesome.min.css") />
+    <link rel="stylesheet" href=@Url.Content("~/assets/css/fonts.googleapis.com.css") />
+    <link rel="stylesheet" href=@Url.Content("~/assets/css/ace.min.css") />
+    <link rel="stylesheet" href=@Url.Content("~/assets/css/ace-rtl.min.css") />
+    <link rel="stylesheet" href=@Url.Content("~/assets/css/jquery-ui.custom.min.css") />
+    <link rel="stylesheet" href=@Url.Content("~/assets/css/chosen.min.css") />
+    <link rel="stylesheet" href=@Url.Content("~/assets/css/bootstrap-datepicker3.min.css") />
+    <link rel="stylesheet" href=@Url.Content("~/assets/css/bootstrap-timepicker.min.css") />
+    <link rel="stylesheet" href=@Url.Content("~/assets/css/daterangepicker.min.css") />
+    <link rel="stylesheet" href=@Url.Content("~/assets/css/bootstrap-datetimepicker.min.css") />
+    <link rel="stylesheet" href=@Url.Content("~/assets/css/bootstrap-colorpicker.min.css") />
+    <link rel="stylesheet" href=@Url.Content("~/assets/css/ace-skins.min.css") />
+    <link rel="stylesheet" href=@Url.Content("~/assets/css/bootstrap.min.css") />
+    <link rel="stylesheet" href=@Url.Content("~/assets/font-awesome/4.5.0/css/font-awesome.min.css") />
+    <link rel="stylesheet" href=@Url.Content("~/assets/css/jquery-ui.min.css") />
+    <link rel="stylesheet" href=@Url.Content("~/assets/css/bootstrap-datepicker3.min.css") />
+    <link rel="stylesheet" href=@Url.Content("~/assets/css/ui.jqgrid.min.css") />
+    <link rel="stylesheet" href=@Url.Content("~/assets/css/ace.min.css") class="ace-main-stylesheet" id="main-ace-style" />
+    <link rel="stylesheet" href=@Url.Content("~/assets/css/ace-skins.min.css") />
+    <link rel="stylesheet" href=@Url.Content("~/assets/css/ace-rtl.min.css") />
+    <link rel="stylesheet" href=@Url.Content("~/assets/css/ace-skins.min.css") />
+    @*js*@
+
+    <script src=@Url.Content("~/assets/js/jquery-2.1.4.min.js")></script>
+    <script src=@Url.Content("~/assets/js/jquery.jqGrid.min.js")></script>
+    <script src=@Url.Content("~/assets/js/jquery.dataTables.min.js")></script>
+    <script src=@Url.Content("~/assets/js/jquery.dataTables.bootstrap.min.js")></script>
+    <script src=@Url.Content("~/assets/js/jquery-ui.custom.min.js")></script>
+    <script src=@Url.Content("~/assets/js/jquery.ui.touch-punch.min.js")></script>
+    <script src=@Url.Content("~/assets/js/jquery.sparkline.index.min.js")></script>
+    <script src=@Url.Content("~/assets/js/jquery.flot.min.js")></script>
+    <script href=@Url.Content("~/assets/js/jquery.gritter.min.js")></script>
+    <script src=@Url.Content("~/assets/js/jquery.flot.resize.min.js")></script>
+    <script type="text/javascript">
+        if ('ontouchstart' in document.documentElement) document.write('<script src=@Url.Content("~/assets/js/jquery.mobile.custom.min.js")>' + "<" + "/script>");
+    </script>
+    <script src=@Url.Content("~/assets/js/bootstrap-datepicker.min.js")></script>
+    <script src=@Url.Content("~/assets/js/bootstrap.min.js")></script>
+    <script src=@Url.Content("~/assets/js/ace-extra.min.js")></script>
+
+    <script href=@Url.Content("~/assets/js/bootbox.js")></script>
+    <script href=@Url.Content("~/assets/js/spin.js")></script>
+
+
+    @*echarts*@
+    <script src=@Url.Content("~/assets/echarts/echarts.js")></script>
+
+    @*ybw's js*@
+
+
+</head>
+<body>
+    @RenderBody()
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

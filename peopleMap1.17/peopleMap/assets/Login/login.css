@@ -1,0 +1,842 @@
+html
+{
+	width: 100%;
+}
+body
+{
+	margin: 0px;
+	height: 100%;
+	position: relative;
+	min-height: 550px;
+	min-width: 720px;
+	border: currentColor;
+	font-family: "微软雅黑",tahoma,verdana,sans-serif;
+	font-size: 12px;
+	vertical-align: middle;
+	background-color: rgb(255, 255, 255);
+}
+table
+{
+	border: currentColor;
+	font-family: "微软雅黑" ,tahoma,verdana,sans-serif;
+	font-size: 12px;
+}
+select
+{
+	border: currentColor;
+	font-family: "微软雅黑" ,tahoma,verdana,sans-serif;
+	font-size: 12px;
+}
+input
+{
+	border: currentColor;
+	font-family: "微软雅黑" ,tahoma,verdana,sans-serif;
+	font-size: 12px;
+}
+button
+{
+	border: currentColor;
+	font-family: "微软雅黑" ,tahoma,verdana,sans-serif;
+	font-size: 12px;
+}
+ 
+input
+{
+	vertical-align: middle;
+	background-color: rgb(255, 255, 255);
+}
+select
+{
+	vertical-align: middle;
+	background-color: rgb(255, 255, 255);
+}
+form
+{
+	margin: 0px;
+	padding: 0px;
+}
+a:link
+{
+	color: rgb(119, 119, 119);
+	text-decoration: none;
+}
+a:visited
+{
+	color: rgb(119, 119, 119);
+	text-decoration: none;
+}
+a:active
+{
+	color: rgb(119, 119, 119);
+	text-decoration: none;
+}
+a:hover
+{
+	color: rgb(0, 0, 0);
+	text-decoration: none;
+}
+.ico
+{
+	width: 16px;
+	height: 16px;
+	display: inline-block;
+	background-image: url("bg.gif");
+}
+.icoZH_CN.ico
+{
+	background-position: 0px -205px;
+}
+.icoZH_TW.ico
+{
+	background-position: -16px -205px;
+}
+.icoEN_US.ico
+{
+	background-position: -32px -205px;
+}
+.icoJA.ico
+{
+	background-position: -48px -205px;
+}
+.Head
+{
+	margin: 0px auto;
+	width: 950px;
+	height: 58px;
+}
+.Head .logo
+{
+	
+	height: 58px;
+	float: left;
+}
+.Head .Links
+{
+	padding: 23px 12px 0px 0px;
+	text-align: right;
+	color: rgb(119, 119, 119);
+	float: right;
+}
+.Head .Links a:hover
+{
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.MainSmall
+{
+	width: 100%;
+	height: 215px;
+	background-color: rgb(22, 118, 167);
+}
+.Main
+{
+	width: 100%;
+	height: 415px;	 
+	/*background-color: rgb(22, 118, 167);*/
+	background-color: rgb(196, 203, 211);
+}
+
+.MainSmall
+{
+	width: 100%;
+	height: 415px;
+	background-color: rgb(22, 118, 167);
+}
+
+.Main1
+{
+	width: 100%;
+	height: 415px;
+	background-color: rgb(196, 203, 211);
+}
+
+.MainBgSmall
+{
+	margin: 0px auto;
+	width: 950px;
+	height: 215px;
+	clear: both;
+	background-image: url("mainBg11.jpg");
+}
+
+.MainBg
+{
+	
+	margin: 0px auto;
+	width: 950px;
+	height: 415px;	
+	/* background-image: url("mainBg.jpg"); */
+
+}
+
+.MainBgIn
+{
+	margin: 0px auto;
+	width: 950px;
+	height: 415px;
+	clear: both;
+	
+
+}
+
+.MainBg1
+{
+	margin: 0px auto;
+	width: 950px;
+	height: 415px;
+	clear: both;
+	background-image: url("mainBg21.jpg");
+}
+.MainL
+{
+	width: 532px;
+	height: 415px;
+	float: left;
+}
+.MainR
+{
+	border: 1px solid rgb(184, 184, 184);
+	margin: 13px 0px 0px;
+	width: 329px;
+	height: 370px;
+	color: rgb(119, 119, 119);
+	font-size: 12px;
+	float: left;
+	background-color: #f4f4f4;
+	
+	
+}
+.MainR .Header
+{
+	margin: 0px 17px;
+	padding: 14px 0px 0px;
+	height: 30px;
+}
+.MainR .Header .title
+{
+	color: rgb(2, 2, 2);
+	font-size: 14px;
+	font-weight: bold;
+	float: left;
+}
+.MainR .Header .language
+{
+	float: right;
+	display: inline-block;
+	cursor: pointer;
+}
+.MainR .Header .language:hover
+{
+	color: rgb(0, 0, 0);
+}
+.MainR .Header .language span
+{
+	margin-right: 2px;
+}
+.MainR .Header .localePanel
+{
+	width: 145px;
+}
+.MainR .select_options
+{
+	border-radius: 2px;
+	border: 1px solid rgb(184, 184, 184);
+	color: rgb(75, 75, 75);
+	display: none;
+	position: absolute;
+	background-color: rgb(255, 255, 255);
+}
+.MainR ul
+{
+	margin: 0px;
+	padding: 0px;
+}
+.MainR #logArea
+{
+	margin: 0px 17px;
+	height: 301px;
+}
+.MainR .Bottom
+{
+	border-radius: 2px;
+	width: 326px;
+	height: 39px;
+	line-height: 39px;
+	margin-left: 4px;
+	border-top-color: rgb(207, 207, 207);
+	border-top-width: 1px;
+	border-top-style: solid;
+	background-color: rgb(255, 255, 255);
+}
+.MainR .Bottom div
+{
+	margin: 0px 17px;
+}
+.MainR .Bottom .facePanel
+{
+	margin: 0px;
+	width: 120px;
+}
+.MainR .Bottom #faceSelectOption
+{
+	_margin: 13px 0;
+}
+.MainR ul li
+{
+	list-style: none;
+	height: 35px;
+	padding-left: 25px;
+	font-size: 14px;
+}
+.MainR ul a
+{
+	color: rgb(0, 0, 0);
+}
+.MainR ul li:hover
+{
+	background-color: rgb(239, 239, 239);
+}
+.MainR ul li span
+{
+	line-height: 16px;
+	margin-top: 10px;
+	vertical-align: top;
+	display: inline-block;
+}
+.MainR .icoArr.ico
+{
+	background-position: 0px -184px;
+	width: 12px;
+	height: 12px;
+	display: inline-block;
+}
+.MainR a:hover .icoArr
+{
+	background-position: -20px -184px;
+}
+.MainR .tips
+{
+	width: 298px;
+}
+.icoError.ico
+{
+	background-position: -45px -185px;
+}
+.icoWarn.ico
+{
+	background-position: -70px -185px;
+}
+.Error
+{
+	margin: 0px;
+	height: auto !important;
+	color: rgb(255, 0, 0);
+	white-space: normal;
+	word-break: break-all;
+	min-height: 23px;
+}
+.Error b
+{
+	vertical-align: middle;
+}
+.Warn b
+{
+	vertical-align: middle;
+}
+.Warn
+{
+	margin: 0px;
+	height: auto !important;
+	color: rgb(251, 129, 26);
+	white-space: normal;
+	word-break: break-all;
+	min-height: 23px;
+}
+#logArea .inptr
+{
+	margin: 0px 0px 6px;
+	height: 43px;
+}
+#logArea .smallInptr
+{
+	margin: 0px 0px 6px;
+	height: 35px;
+}
+#logArea .inplist
+{
+	width: 298px;
+	height: 23px;
+	text-align: center;
+}
+#logArea .inplist span
+{
+	margin-right: 8px;
+}
+#logArea .inpB
+{
+	height: 40px;
+	margin-bottom: 5px;
+}
+#logArea .inpUser
+{
+	background: url("bg.gif") 0px 0px;
+	padding: 10px 3px 2px 25px;
+	border-radius: 2px;
+	border: 1px solid rgb(184, 184, 184);
+	width: 268px;
+	height: 27px;
+	/*color: rgb(158, 196, 207);*/
+	font-family: verdana;
+	font-size: 16px;
+	font-weight: bold;
+}
+#logArea .inpPW
+{
+	background: url("bg.gif") no-repeat 0px -138px;
+	padding: 10px 3px 2px 25px;
+	border-radius: 2px;
+	border: 1px solid rgb(184, 184, 184);
+	width: 268px;
+	height: 27px;
+	/* color: rgb(158, 196, 207); */
+	font-family: verdana;
+	font-size: 16px;
+	font-weight: bold;
+}
+#logArea .inpDomain
+{
+	background: url("bg.gif") no-repeat 0px -430px;
+	padding: 6px 3px 4px 25px;
+	border-radius: 2px;
+	border: 1px solid rgb(184, 184, 184);
+	width: 268px;
+	height: 21px;
+	color: rgb(75, 75, 75);
+	font-family: verdana;
+	font-size: 14px;
+	cursor: pointer;
+}
+#logArea .inpDomain:hover
+{
+	background: url("bg.gif") no-repeat 0px -51px;
+}
+#logArea .inpDomain:active
+{
+	background: url("bg.gif") no-repeat 0px -97px;
+}
+#logArea .inpDomain-hover
+{
+	background-position: 0px -92px;
+}
+#logArea .domainPanel
+{
+	width: 296px;
+}
+#logArea .inpCode
+{
+	padding: 6px 5px 4px;
+	border-radius: 2px;
+	border: 1px solid rgb(184, 184, 184);
+	width: 60px;
+	height: 21px;
+	color: rgb(75, 75, 75);
+	font-family: verdana;
+	font-size: 14px;
+	float: left;
+	background-color: rgb(255, 255, 255);
+}
+#logArea .indent
+{
+	height: auto;
+	padding-left: 100px;
+	_padding-left: 102px;
+}
+#logArea .inpreg
+{
+	height: 15px;
+}
+#logArea .inpreg hr
+{
+	border-width: 1px;
+	border-style: solid;
+	border-color: rgb(255, 255, 255) rgb(255, 255, 255) rgb(204, 204, 204);
+	margin-left: 48px;
+}
+#logArea .inpreg a
+{
+	color: rgb(80, 126, 164);
+}
+.MainR label
+{
+	float: left;
+}
+.MainR label.for
+{
+	float: right;
+}
+.MainM
+{
+	width: 100%;
+	height: 55px;
+	border-top-color: rgb(185, 185, 185);
+	border-top-width: 1px;
+	border-top-style: solid;
+	background-color: rgb(232, 232, 232);
+}
+.MainM .main
+{
+	margin: 15px auto 0px;
+	width: 950px;
+}
+.MainM dl
+{
+	margin: 0px 10px;
+	padding: 0px;
+	color: rgb(119, 119, 119);
+	float: left;
+}
+.MainM dl span
+{
+	line-height: 24px;
+	font-size: 14px;
+	font-weight: bold;
+	margin-left: 5px;
+	display: inline-block;
+}
+.MainM dl a
+{
+	display: inline-block;
+}
+.MainM dl a:hover
+{
+	color: rgb(0, 0, 0);
+}
+.bico
+{
+	width: 26px;
+	height: 26px;
+	float: left;
+	display: inline-block;
+	background-image: url("bico.gif");
+}
+.MainM dl .icoPhone.bico
+{
+}
+.MainM dl a:hover .icoPhone.bico
+{
+	background-position: 0px -26px;
+}
+.MainM dl .icoTemplate.bico
+{
+	background-position: -26px 0px;
+}
+.MainM dl a:hover .icoTemplate.bico
+{
+	background-position: -26px -26px;
+}
+.MainM dl .icoMultiSecurity.bico
+{
+	background-position: -52px 0px;
+}
+.MainM dl a:hover .icoMultiSecurity.bico
+{
+	background-position: -52px -26px;
+}
+.MainM dl .icoCalendar.bico
+{
+	background-position: -78px 0px;
+}
+.MainM dl a:hover .icoCalendar.bico
+{
+	background-position: -78px -26px;
+}
+.Button
+{
+	background: url("bg.gif") no-repeat 0px -225px;
+	border: currentColor;
+	width: 295px;
+	height: 40px;
+	color: rgb(255, 255, 255);
+	font-size: 16px;
+	font-weight: bold;
+	margin-right: 10px;
+	cursor: pointer;
+}
+.Button-hover
+{
+	background-position: 0px -275px;
+}
+.Button-click
+{
+	background-position: 0px -325px;
+}
+.input
+{
+	padding: 4px 3px;
+	border: 1px solid rgb(184, 184, 184);
+	width: 100px;
+	font-family: verdana;
+	font-size: 14px;
+	font-weight: bold;
+}
+.inputWidth
+{
+	padding: 3px 0px;
+	border: 1px solid rgb(184, 184, 184);
+	width: 298px;
+	height: 41px;
+	font-size: 14px;
+}
+.footer
+{
+	margin: 0px auto;
+	width: 950px;
+	height: 35px;
+	padding-bottom: 20px;
+	clear: both;
+}
+.footer .link
+{
+	height: 0px;
+	text-align: center;
+	line-height: 0;
+	overflow: hidden;
+}
+.footer .copyright
+{
+	margin: 12px 0px 0px 0px;
+	text-align: right;
+	color: rgb(152, 152, 152);
+}
+.footer .copyright a
+{
+	color: rgb(152, 152, 152);
+	text-decoration: none;
+}
+.footer .copyright a:hover
+{
+	color: rgb(0, 0, 0);
+	text-decoration: none;
+}
+.error
+{
+	color: red;
+}
+.strength_O
+{
+	border-right-color: rgb(190, 190, 190);
+	border-bottom-color: rgb(190, 190, 190);
+	border-right-width: 0px;
+	border-bottom-width: 0px;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	background-color: rgb(235, 235, 235);
+}
+.strength_L
+{
+	border-right-color: rgb(187, 43, 43);
+	border-bottom-color: rgb(187, 43, 43);
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	background-color: rgb(255, 69, 69);
+}
+.strength_M
+{
+	border-right-color: rgb(233, 174, 16);
+	border-bottom-color: rgb(233, 174, 16);
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	background-color: rgb(255, 211, 94);
+}
+.strength_H
+{
+	border-right-color: rgb(38, 122, 18);
+	border-bottom-color: rgb(38, 122, 18);
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	background-color: rgb(58, 187, 28);
+}
+#vcImageTR
+{
+	float: left;
+}
+#vcImageTR .vcImage
+{
+	margin: 5px 0px 0px 10px;
+	float: left;
+}
+#vcImageTR .vcLink
+{
+	margin: 0px 0px 0px 10px;
+	float: left;
+}
+#vcImageTR a
+{
+	line-height: 30px;
+}
+#winFrame
+{
+	border: 2px solid rgb(161, 161, 161);
+	width: 425px;
+	height: auto;
+	box-shadow: 0px 0px 5px rgba(0,0,0,0.2);
+}
+#winFrame .winHead
+{
+	height: 30px;
+	line-height: 28px;
+	background-color: rgb(255, 255, 255);
+}
+#winFrame .winHead .closeBtn
+{
+	margin-top: 10px;
+	margin-right: 10px;
+	float: right;
+	cursor: pointer;
+}
+#winFrame .winHead .icoClose.ico
+{
+	background-position: -279px -185px;
+}
+.icoClose.ico:hover
+{
+	background-position: -263px -185px;
+}
+#winFrame .winMain
+{
+	padding: 20px;
+	height: auto !important;
+	color: rgb(51, 51, 51);
+	min-height: 80px;
+	background-color: rgb(255, 255, 255);
+}
+#winFrame .winMain .winBotton
+{
+	border: 1px solid rgb(18, 63, 122);
+	width: 65px;
+	height: 30px;
+	color: rgb(255, 255, 255);
+	font-size: 14px;
+	font-weight: bold;
+	margin-right: 10px;
+	cursor: pointer;
+	background-color: rgb(4, 121, 188);
+}
+#winFrame .winMain .inpKey
+{
+	background: url("bg.gif") 0px -375px;
+	padding: 10px 3px 2px 25px;
+	border-radius: 2px;
+	border: 1px solid rgb(184, 184, 184);
+	width: 268px;
+	height: 27px;
+	color: rgb(158, 196, 207);
+	font-family: verdana;
+	font-size: 14px;
+}
+:root #logArea .inpUser
+{
+	padding: 6px 3px 6px 25px;
+}
+:root #logArea .inpPW
+{
+	padding: 6px 3px 6px 25px;
+}
+:root #winFrame .winMain .inpKey
+{
+	padding: 6px 3px 6px 25px;
+}
+#winFrame .winFoot
+{
+	height: 46px;
+	background-color: rgb(239, 239, 239);
+}
+#winFrame .winFoot .winBotton
+{
+	border: 1px solid rgb(18, 63, 122);
+	height: 30px;
+	color: rgb(255, 255, 255);
+	font-size: 14px;
+	font-weight: bold;
+	margin-top: 5px;
+	margin-right: 10px;
+	float: right;
+	cursor: pointer;
+	min-width: 65px;
+	background-color: rgb(4, 121, 188);
+}
+.inpOver
+{
+	border-color: rgb(177, 217, 234) !important;
+}
+.inpFocus
+{
+	border-color: rgb(133, 195, 221) !important;
+	color: rgb(0, 0, 0) !important;
+	box-shadow: 0px 0px 5px #85c3dd;
+}
+.inped
+{
+	color: rgb(0, 0, 0) !important;
+}
+
+.bgstretcher-area { text-align: left; }
+.bgstretcher, .bgstretcher UL, .bgstretcher UL LI {
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+.bgstretcher UL, .bgstretcher UL LI {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+.bgstretcher {
+	background: black;
+	overflow: hidden;
+	width: 100%;
+	position: fixed;
+	z-index: 1;
+	_position: absolute; /*IE6 doesn't support fixed positioning*/
+	top: 0;
+	left: 0;
+}
+.loginImgTitle{
+	position:absolute;
+	top:65px;
+	left:125px;	
+	font-family: 微软雅黑,Tahoma, Geneva, sans-serif;
+	font-size: 24px;
+	font-weight: bold;
+	letter-spacing: 2.0pt;
+	word-spacing: 7.6pt;
+	line-height: 1.4;
+	color: #FFFFFF;
+	text-shadow: black 0 2px 1;
+	
+}
+.loginImgTitle2{
+	position:absolute;
+	top:115px;
+	left:125px;	
+	font-family: 微软雅黑,Tahoma, Geneva, sans-serif;
+	font-size: 24px;
+	font-weight: bold;
+	letter-spacing: 2.0pt;
+	word-spacing: 7.6pt;
+	line-height: 1.4;
+	color: #FFFFFF;
+	text-shadow: black 0 2px 1;
+	
+}
+.dd
+{	
+	cursor:pointer;	
+}

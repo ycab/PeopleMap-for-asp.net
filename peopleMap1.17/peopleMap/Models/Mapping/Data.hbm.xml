@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="peopleMap" namespace="Models.Mapping">
+	<class name="peopleMap.Models.Data,peopleMap" table="T_RCDT_DATA" lazy="true" >
+		<id name="RCID" column="RCID" type="string" >
+			<generator class="assigned" />
+		</id>
+		<property name="SSLB" column="SSLB" type="string"></property>
+		<property name="RCLB" column="RCLB" type="string"></property>
+		<property name="RCNAME" column="RCNAME" type="string"></property>
+		<property name="SEX" column="SEX" type="string"></property>
+		<property name="BIRTHDAY" column="BIRTHDAY" type="string"></property>
+		<property name="SZJG" column="SZJG" type="string"></property>
+		<property name="COUNTRY" column="COUNTRY" type="string"></property>
+		<property name="SF" column="SF" type="string"></property>
+		<property name="CITY" column="CITY" type="string"></property>
+		<property name="ZC" column="ZC" type="string"></property>
+		<property name="ZW" column="ZW" type="string"></property>
+		<property name="TX" column="TX" type="string"></property>
+		<property name="PRICE" column="PRICE" type="string"></property>
+		<property name="ZLNUMBER" column="ZLNUMBER" type="int"></property>
+		<property name="ZLNR" column="ZLNR" type="peopleMap.Models.OracleClobField,peopleMap"></property>
+		<property name="YJFX" column="YJFX" type="string"></property>
+		<property name="RCURL" column="RCURL" type="string"></property>
+		<property name="EMAIL" column="EMAIL" type="string"></property>
+		<property name="PHONE" column="PHONE" type="string"></property>
+		<property name="ADDRESS" column="ADDRESS" type="string"></property>
+		<property name="BZ" column="BZ" type="string"></property>
+    <property name="SSZL" column="SSZL" type="string"></property>
+
+	</class>
+</hibernate-mapping>

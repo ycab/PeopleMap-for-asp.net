@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="peopleMap" namespace="Models.Mapping">
+	<class name="peopleMap.Models.RCQZ,peopleMap" table="T_RCDT_QZ" lazy="true" >
+		<id name="QZID" column="QZID" type="string" >
+			<generator class="assigned" />
+		</id>
+		<property name="QZNAME" column="QZNAME" type="string"></property>
+		<property name="QZ" column="QZ" type="Decimal"></property>
+	</class>
+</hibernate-mapping>

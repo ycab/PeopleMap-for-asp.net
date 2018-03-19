@@ -1,0 +1,242 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta charset="utf-8" />
+    <title>Dashboard - Ace Admin</title>
+
+    <meta name="description" content="overview &amp; stats" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+
+    <!-- 引入bootStrap相关以及字体 -->
+    <link rel="stylesheet" href=@Url.Content("~/assets/css/bootstrap.min.css") />
+    <link rel="stylesheet" href=@Url.Content("~/assets/font-awesome/4.5.0/css/font-awesome.min.css") />
+    <!-- page specific plugin styles -->
+    <link rel="stylesheet" href=@Url.Content("~/assets/css/jquery-ui.min.css") />
+    <link rel="stylesheet" href=@Url.Content("~/assets/css/bootstrap-datepicker3.min.css") />
+    <link rel="stylesheet" href=@Url.Content("~/assets/css/ui.jqgrid.min.css") />
+
+
+
+    <!-- ace styles
+        引入ace框架的主要样式 ace.css -->
+    <link rel="stylesheet" href=@Url.Content("~/assets/css/ace.min.css") class="ace-main-stylesheet" id="main-ace-style" />
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="assets/css/ace-part2.min.css" class="ace-main-stylesheet" />
+    <![endif]-->
+    <link rel="stylesheet" href=@Url.Content("~/assets/css/ace-skins.min.css") />
+    <link rel="stylesheet" href=@Url.Content("~/assets/css/ace-rtl.min.css") />
+   
+    <script src=@Url.Content("~/assets/js/ace-extra.min.js")></script>
+
+    <script src=@Url.Content("~/assets/js/jquery-2.1.4.min.js")></script>
+
+   
+    <script src=@Url.Content("~/assets/js/bootstrap.min.js")></script>
+
+  
+    <script src=@Url.Content("~/assets/js/jquery-ui.custom.min.js")></script>
+    <script src=@Url.Content("~/assets/js/jquery.ui.touch-punch.min.js")></script>
+    <script src=@Url.Content("~/assets/js/jquery.easypiechart.min.js")></script>
+    <script src=@Url.Content("~/assets/js/jquery.sparkline.index.min.js")></script>
+    <script src=@Url.Content("~/assets/js/jquery.flot.min.js")></script>
+    <script src=@Url.Content("~/assets/js/jquery.flot.pie.min.js")></script>
+    <script src=@Url.Content("~/assets/js/jquery.flot.resize.min.js")></script>
+
+    <!-- ace scripts -->
+    <script src=@Url.Content("~/assets/js/ace-elements.min.js")></script>
+    <script src=@Url.Content("~/assets/js/ace.min.js")></script>
+
+    <!-- page specific plugin scripts -->
+    <script src=@Url.Content("~/assets/js/bootstrap-datepicker.min.js")></script>
+    <script src=@Url.Content("~/assets/js/jquery.jqGrid.min.js")></script>
+    <script src=@Url.Content("~/assets/jqgrid/js/i18n/grid.locale-cn.js")></script>
+    <!-- ace scripts -->
+    <script src=@Url.Content("~/assets/js/ace-elements.min.js")></script>
+    <script src=@Url.Content("~/assets/js/ace.min.js")></script>
+    <style>
+        .no-skin {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            background-color: white !important;
+        }
+    </style>
+    <script type="text/javascript">
+
+        $(function () {
+            $('#registerbtn').click(function () {
+                var data = {};
+                data["username"] = $("#username").val();
+                data["oldpassward"] = $("#oldpassward").val();
+                data["newpassward"] = $("#newpassward").val();
+                data["confirmnewpassward"] = $("#confirmnewpassward").val();
+
+                for (var key in data) {
+                    if (data[key] == "")
+                    {
+                        alert("请填写内容");
+                        return false;
+                    }
+                }
+                if (data["newpassward"] != $("#confirmnewpassward").val()) {
+                    document.getElementById('oldpassward').value = null;
+                    document.getElementById('newpassward').value = null;
+                    document.getElementById('confirmnewpassward').value = null;
+                    alert("新密码前后不一致");
+                    return false;
+                }
+                var abc='@Url.Action("../User/EditPwd")';
+                $.ajax({
+                    type: 'post',
+                    url: abc,
+                    data: data,
+                    success: function (data2) {
+                        if (data2 == "success") {
+                            document.getElementById('oldpassward').value = null;
+                            document.getElementById('newpassward').value = null;
+                            document.getElementById('confirmnewpassward').value = null;
+                            alert("修改成功");
+                            //location.reload();
+                        }
+                        else {
+                            document.getElementById('oldpassward').value = null;
+                            document.getElementById('newpassward').value = null;
+                            document.getElementById('confirmnewpassward').value = null;
+                            alert("旧密码错误");
+                        }
+                    },
+                    error: function () {
+                        alert("error");
+                    }
+                });
+                $.post("@Url.Action("accountregister", "accountmanage")", data, function (response) {
+                    if (response == "success")
+
+                    {
+                        alert("注册成功", {
+                            title: '提示框',
+                            icon: 1,
+
+                        });
+
+                    }
+                    else
+                        alert("注册失败", {
+                            title: '提示框',
+                            icon: 0,
+
+                        });
+                    location.reload();
+
+                });
+
+
+
+            })
+
+
+
+        })
+
+        ///加载
+        function loaddepartment()
+        {
+            $.post("@Url.Action("GetBranchOfficeAndPCS", "department")", null, function (response) {
+                var branchofficeandpcs = eval('(' + response + ')');
+                for (var i = 0; i < branchofficeandpcs.length; i++) {
+                    $("#choosedepartValue").append('<option value="' + branchofficeandpcs[i]['DEPARTMENT_NUM'] + '">' + branchofficeandpcs[i]['DEPARTMENT_NAME'] + '</option>');
+                }
+
+            });
+
+        }
+
+    </script>
+
+</head>
+<body class="no-skin">
+    <div class="page-content clearfix">
+        <div class="page-header">
+            <h1>
+                人员管理
+                <small>
+                    <i class="ace-icon fa fa-angle-double-right"></i>
+                   修改密码
+                </small>
+            </h1>
+        </div><!-- /.page-header -->
+       
+        <div class="row">
+            <div class="col-xs-12 col-md-12">
+
+                @*<form action="/User/ImportExcel" method="post" id="PeopleDetailForm" enctype="multipart/form-data">
+
+                    <input id="fileSelect" type="file" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" />    
+                   <input class=""type="submit" value="提交" />
+                </form>*@
+
+                    <div class="Order_form clearfix" id="Order_form_style">
+                        <div class="title_name">
+                            <i class="icon-leaf green"></i> 修改密码
+
+                        </div>
+                        <div class="hide_style clearfix">
+                            <form class="form-horizontal" id="sample-form">
+                                <div class="form-group"></div>
+
+                                <div class="form-group">
+                                    <label for="inputError" class="col-xs-12 col-sm-2 col-md-2 control-label no-padding-right">旧密码<label style="color:red">*</label>：</label>
+
+                                    <div class="col-xs-12 col-sm-3">
+
+                                        <input type="text" id="oldpassward" name="oldpassward" class="form-control" placeholder="请填写之前的密码" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+
+                                    <label for="inputError" class="col-xs-12 col-sm-2 col-md-2 control-label no-padding-right">新密码<label style="color:red">*</label>：</label>
+
+                                    <div class="col-xs-12 col-sm-3">
+                                        <input type="password" class="form-control" id="newpassward" name="newpassward" placeholder="请输入密码" />
+                                    </div>
+
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputError" class="col-xs-12 col-sm-2 col-md-2 control-label no-padding-right">确认新密码<label style="color:red">*</label>：</label>
+
+                                    <div class="col-xs-12 col-sm-3">
+                                        <input type="password" class="form-control" id="confirmnewpassward" name="confirmnewpassward" placeholder="请确认新密码" />
+                                    </div>
+                                </div>
+                                @*按钮如果不写type类型，页面执行按钮事件后会自动刷新*@
+                                <div class="wizard-actions">
+                                    <button type="button" id="registerbtn" class="btn btn-success btn-next">
+                                        修改
+                                        <i class="ace-icon fa fa-arrow-right icon-on-right"></i>
+                                    </button>
+                                </div>
+
+
+
+
+                            </form>
+                        </div>
+                    </div>
+
+
+
+
+</div>
+        </div>
+    </div>
+</body>
+</html>
+
+

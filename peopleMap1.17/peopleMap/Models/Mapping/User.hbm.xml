@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="peopleMap" namespace="Models.Mapping">
+	<class name="peopleMap.Models.User,peopleMap" table="T_RCDT_PERSON" lazy="true" >
+		<id name="UserID" column="USERID" type="string" >
+			<generator class="assigned" />
+		</id>
+		<property name="Username" column="USERNAME" type="string"></property>
+		<property name="Pwd" column="PWD" type="string"></property>
+		<property name="Contact" column="CONTACT" type="string"></property>
+		<property name="Gender" column="GENDER" type="string"></property>
+    <property name="Unit" column="UNIT" type="string"></property>
+		<property name="Authority" column="AUTHORITY" type="string"></property>
+	</class>
+</hibernate-mapping>

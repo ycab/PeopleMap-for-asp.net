@@ -1,0 +1,638 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta charset="utf-8" />
+    <title>Dashboard - Ace Admin</title>
+
+    <meta name="description" content="overview &amp; stats" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+
+    <!-- 引入bootStrap相关以及字体 -->
+    <link rel="stylesheet" href=@Url.Content("~/assets/css/bootstrap.min.css") />
+    <link rel="stylesheet" href=@Url.Content("~/assets/font-awesome/4.5.0/css/font-awesome.min.css") />
+    <!-- page specific plugin styles -->
+    <link rel="stylesheet" href=@Url.Content("~/assets/css/jquery-ui.min.css") />
+    <link rel="stylesheet" href=@Url.Content("~/assets/css/bootstrap-datepicker3.min.css") />
+    <link rel="stylesheet" href=@Url.Content("~/assets/css/ui.jqgrid.min.css") />
+
+    <!-- ace styles
+        引入ace框架的主要样式 ace.css -->
+    <link rel="stylesheet" href=@Url.Content("~/assets/css/ace.min.css") class="ace-main-stylesheet" id="main-ace-style" />
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="assets/css/ace-part2.min.css" class="ace-main-stylesheet" />
+    <![endif]-->
+    <link rel="stylesheet" href=@Url.Content("~/assets/css/ace-skins.min.css") />
+    <link rel="stylesheet" href=@Url.Content("~/assets/css/ace-rtl.min.css") />
+
+   
+    <script src=@Url.Content("~/assets/js/ace-extra.min.js")></script>
+
+    <style>
+        .no-skin {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            background-color: white !important;
+        }
+    </style>
+
+
+
+</head>
+
+<body class="no-skin">
+    <!--主体布局 2，3，4，5，6-->
+    <!--主体布局-->
+    <div class="main-content">
+
+        <div class="page-content">
+            <div class="page-header">
+                <h1>
+                    人员管理
+                    <small>
+                        <i class="ace-icon fa fa-angle-double-right"></i>
+                        管理员管理
+                    </small>
+                </h1>
+            </div><!-- /.page-header -->
+
+            <div class="row">
+                <div class="col-xs-12">
+
+
+
+                    <table id="grid-table"></table>
+
+                    <div id="grid-pager"></div>
+
+                    <!-- PAGE CONTENT ENDS -->
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.page-content -->
+
+    </div><!-- /.main-content -->
+    <!-- basic scripts -->
+    <!--[if !IE]> -->
+    <script src=@Url.Content("~/assets/js/jquery-2.1.4.min.js")></script>
+
+    <!-- <![endif]-->
+    <!--[if IE]>
+    <script src="assets/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+  
+    <script src=@Url.Content("~/assets/js/bootstrap.min.js")></script>
+
+    <!-- page specific plugin scripts -->
+    <!--[if lte IE 8]>
+      <script src="assets/js/excanvas.min.js"></script>
+    <![endif]-->
+    <script src=@Url.Content("~/assets/js/jquery-ui.custom.min.js")></script>
+    <script src=@Url.Content("~/assets/js/jquery.ui.touch-punch.min.js")></script>
+    <script src=@Url.Content("~/assets/js/jquery.easypiechart.min.js")></script>
+    <script src=@Url.Content("~/assets/js/jquery.sparkline.index.min.js")></script>
+    <script src=@Url.Content("~/assets/js/jquery.flot.min.js")></script>
+    <script src=@Url.Content("~/assets/js/jquery.flot.pie.min.js")></script>
+    <script src=@Url.Content("~/assets/js/jquery.flot.resize.min.js")></script>
+
+    <!-- ace scripts -->
+    <script src=@Url.Content("~/assets/js/ace-elements.min.js")></script>
+    <script src=@Url.Content("~/assets/js/ace.min.js")></script>
+
+    <!-- page specific plugin scripts -->
+    <script src=@Url.Content("~/assets/js/bootstrap-datepicker.min.js")></script>
+    <script src=@Url.Content("~/assets/js/jquery.jqGrid.min.js")></script>
+    <script src=@Url.Content("~/assets/jqgrid/js/i18n/grid.locale-cn.js")></script>
+    <!-- ace scripts -->
+    <script src=@Url.Content("~/assets/js/ace-elements.min.js")></script>
+    <script src=@Url.Content("~/assets/js/ace.min.js")></script>
+
+
+    <!-- inline scripts related to this page -->
+    <script type="text/javascript">
+
+    var grid_data =
+            [
+                { UserID: "2", Username: "Laptop", Pwd: "Long text ", Email: "Yes", Gender: "InTime", Authority: "2007-12-03" },
+                { ID: "1", Username: "Laptop", Pwd: "Long text ", Email: "Yes", Gender: "InTime", Authority: "2007-12-03" },
+
+            ];
+
+
+    var subgrid_data =
+    [
+     { id: "1", name: "sub grid item 1", qty: 11 },
+     { id: "2", name: "sub grid item 2", qty: 3 },
+     { id: "3", name: "sub grid item 3", qty: 12 },
+     { id: "4", name: "sub grid item 4", qty: 5 },
+     { id: "5", name: "sub grid item 5", qty: 2 },
+     { id: "6", name: "sub grid item 6", qty: 9 },
+     { id: "7", name: "sub grid item 7", qty: 3 },
+     { id: "8", name: "sub grid item 8", qty: 8 }
+    ];
+
+    jQuery(function ($) {
+        var grid_selector = "#grid-table";
+        var pager_selector = "#grid-pager";
+
+
+        var parent_column = $(grid_selector).closest('[class*="col-"]');
+        //resize to fit page size
+        $(window).on('resize.jqGrid', function () {
+            $(grid_selector).jqGrid('setGridWidth', parent_column.width());
+        })
+
+        //resize on sidebar collapse/expand
+        $(document).on('settings.ace.jqGrid', function (ev, event_name, collapsed) {
+            if (event_name === 'sidebar_collapsed' || event_name === 'main_container_fixed') {
+                //setTimeout is for webkit only to give time for DOM changes and then redraw!!!
+                setTimeout(function () {
+                    $(grid_selector).jqGrid('setGridWidth', parent_column.width());
+                }, 20);
+            }
+        })
+
+        //if your grid is inside another element, for example a tab pane, you should use its parent's width:
+        /**
+        $(window).on('resize.jqGrid', function () {
+            var parent_width = $(grid_selector).closest('.tab-pane').width();
+            $(grid_selector).jqGrid( 'setGridWidth', parent_width );
+        })
+        //and also set width when tab pane becomes visible
+        $('#myTab a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+          if($(e.target).attr('href') == '#mygrid') {
+            var parent_width = $(grid_selector).closest('.tab-pane').width();
+            $(grid_selector).jqGrid( 'setGridWidth', parent_width );
+          }
+        })
+        */
+
+
+
+
+
+        jQuery(grid_selector).jqGrid({
+            //direction: "rtl",
+
+            //subgrid options
+            subGrid: false,
+            //subGridModel: [{ name : ['No','Item Name','Qty'], width : [55,200,80] }],
+            //datatype: "xml",
+            subGridOptions: {
+                plusicon: "ace-icon fa fa-plus center bigger-110 blue",
+                minusicon: "ace-icon fa fa-minus center bigger-110 blue",
+                openicon: "ace-icon fa fa-chevron-right center orange"
+            },
+            //for this example we are using local data
+            subGridRowExpanded: function (subgridDivId, rowId) {
+                var subgridTableId = subgridDivId + "_t";
+                $("#" + subgridDivId).html("<table id='" + subgridTableId + "'></table>");
+                $("#" + subgridTableId).jqGrid({
+                    datatype: 'local',
+                    data: subgrid_data,
+                    colNames: ['No', 'Item Name', 'Qty'],
+                    colModel: [
+                        { name: 'id', width: 50 },
+                        { name: 'name', width: 150 },
+                        { name: 'qty', width: 50 }
+                    ]
+                });
+            },
+            url:'@Url.Content("~/User/GetList")',
+            // url: '/User/GetList',
+            //  data: grid_data,
+            caption: "人员列表",
+            type: "post",
+            datatype: "json",
+            height: 300,
+            colNames: [' ', 'ID', '用户名', '密码', '性别', '所属机构','联系方式', '权限'],
+            colModel: [
+                {
+                    name: 'myac', index: '', width: 80, fixed: true, sortable: false, resize: false,
+                    formatter: 'actions',
+                    formatoptions: {
+                        keys: true,
+                        //delbutton: false,//disable delete button
+
+                        delOptions: { recreateForm: true, beforeShowForm: beforeDeleteCallback },
+                        editformbutton:true, editOptions:{recreateForm: true, beforeShowForm:beforeEditCallback,closeAfterEdit: true , afterComplete: function () {
+                            var url = '@Url.Content("~/User/GetList")';
+                            //var url = "~/User/GetList2" ;
+                            $("#grid-table").jqGrid("setGridParam", { datatype: 'json', page: 1, loadonce: true, url: url }).trigger("reloadGrid");
+                        }}
+                    }
+                },
+                { name: 'UserID', index: 'UserID', width: 60, sortable: true, editable: true, key: true, hidden: true },
+                {
+                    name: 'Username', index: 'Username', width: 60, sortable: true, editable: true, editrules: {
+                        required: true,
+                        edithidden: true,
+
+                    }
+                },
+                {
+                    name: 'Pwd', index: 'Pwd', width: 60, sortable: true, editable: true, edittype: "password", hidden: true,
+                    editoptions: { size: "20", maxlength: "30" }, editrules: {
+                        required: true,
+                        edithidden: true,
+
+                    }
+                },
+                { name: 'Gender', index: 'Gender', width: 60, sortable: true, editable: true, edittype: "select", editoptions: { value: "男:男;女:女" } },
+                { name: 'Unit', index: 'Unit', width: 60, sortable: true, editable: true },
+                { name: 'Contact', index: 'Contact', width: 60, sortable: true, editable: true },
+                { name: 'Authority', index: 'Authority', width: 60, sortable: true, editable: false ,search:false},
+            ],
+
+            viewrecords: true,
+            rowNum: 10,
+            rowList: [10, 20, 30],
+            loadonce:true,
+            pager: pager_selector,
+            altRows: true,
+            //toppager: true,
+
+            multiselect: true,
+            //multikey: "ctrlKey",
+            multiboxonly: true,
+
+            loadComplete: function () {
+                var table = this;
+                var postData = $("#grid-table").jqGrid("getGridParam", "postData");
+                setTimeout(function () {
+                    styleCheckbox(table);
+
+                    updateActionIcons(table);
+                    updatePagerIcons(table);
+                    enableTooltips(table);
+                }, 0);
+            },
+
+            //editurl: '/User/ManagerEdit',
+            editurl: '@Url.Content("~/User/ManagerEdit")',
+
+        //,autowidth: true,
+
+
+        /**
+        ,
+        grouping:true,
+        groupingView : {
+             groupField : ['name'],
+             groupDataSorted : true,
+             plusicon : 'fa fa-chevron-down bigger-110',
+             minusicon : 'fa fa-chevron-up bigger-110'
+        },
+        caption: "Grouping"
+        */
+
+    });
+    $(window).triggerHandler('resize.jqGrid');//trigger window resize to make the grid get the correct size
+
+
+
+    //enable search/filter toolbar
+    //jQuery(grid_selector).jqGrid('filterToolbar',{defaultSearch:true,stringResult:true})
+    //jQuery(grid_selector).filterToolbar({});
+
+
+    //switch element when editing inline
+    function aceSwitch(cellvalue, options, cell) {
+        setTimeout(function () {
+            $(cell).find('input[type=checkbox]')
+                .addClass('ace ace-switch ace-switch-5')
+                .after('<span class="lbl"></span>');
+        }, 0);
+    }
+    //enable datepicker
+    function pickDate(cellvalue, options, cell) {
+        setTimeout(function () {
+            $(cell).find('input[type=text]')
+                .datepicker({ format: 'yyyy-mm-dd', autoclose: true });
+        }, 0);
+    }
+
+
+    //navButtons
+    jQuery(grid_selector).jqGrid('navGrid', pager_selector,
+        { 	//navbar options
+            edit: true,
+            editicon: 'ace-icon fa fa-pencil blue',
+            add: true,
+            addicon: 'ace-icon fa fa-plus-circle purple',
+            del: true,
+            delicon: 'ace-icon fa fa-trash-o red',
+            search: true,
+            searchicon: 'ace-icon fa fa-search orange',
+            refresh: true,
+            refreshicon: 'ace-icon fa fa-refresh green',
+            view: true,
+            viewicon: 'ace-icon fa fa-search-plus grey',
+        },
+        {
+            ////edit record form
+            ////
+            ////width: 700,
+            recreateForm: true,
+            beforeShowForm: function (e) {
+                var form = $(e[0]);
+                form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
+                style_edit_form(form);
+            },
+            closeAfterEdit: true,
+            url: '@Url.Content("~/User/ManagerEdit")',
+            // url: '/User/ManagerEdit',
+            mtype: 'POST',
+            closeAfterSubmit: true,
+            afterSubmit: function (xhr, postdata) {
+                var ip = $("#grid-table").jqGrid('getGridParam', 'selrow');
+                jQuery("#grid-table").jqGrid('setRowData', ip, postdata);
+                return [true, ""]
+            },
+            //closeAfterSubmit: true, closeOnEscape: true
+
+
+        },
+        {
+            //new record form
+            //width: 700,
+            closeAfterAdd: true,
+            recreateForm: true,
+            viewPagerButtons: false,
+            beforeShowForm: function (e) {
+                var form = $(e[0]);
+                form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar')
+                .wrapInner('<div class="widget-header" />')
+                style_edit_form(form);
+            },
+            afterComplete: function () {
+                var url ='@Url.Content("~/User/GetList")';
+                $("#grid-table").jqGrid("setGridParam", { datatype: 'json', page: 1, loadonce: true, url: url }).trigger("reloadGrid");
+            }
+        },
+        {
+            //delete record form
+            recreateForm: true,
+            beforeShowForm: function (e) {
+                var form = $(e[0]);
+                if (form.data('styled')) return false;
+
+                form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
+                style_delete_form(form);
+                var rowid = $("#grid-table").jqGrid('getGridParam', 'selrow');
+                // celldata=$("#grid-table").jqGrid('getCell',rowid,'UserID');
+                //form.data('styled', true);
+            },
+            // closeAfterDel: true,
+            closeAfterEdit: true,
+            //url: '/User/ManagerEdit',
+            url: '@Url.Content("~/User/ManagerEdit")',
+                    mtype: 'POST',
+                    //  data:  {Userid:celldata},
+                    //afterSubmit: function (xhr, postdata) {
+                    //    //var selectedRowIds = $("#grid-table").jqGrid("getGridParam", "selarrrow");
+                    //    //var len = selectedRowIds.length;
+                    //    //var UserId =new Array();
+                    //    //for (var i = 0; i <len; i++) {
+                    //    //    UserId[i]=datas[selectedRowIds[i]-1].UserId;
+                    //    //}
+                    //    var rowid = $("#grid-table").jqGrid('getGridParam', 'selrow');
+                    //    var celldata=$("#grid-table").jqGrid('getCell',rowid,'UserID');
+                    //    //post userId组到后台，让后台删除（PS：这里是我的逻辑实现，我的后台是对userId进行删除的）
+                    //    $.ajax({
+                    //        type: "post",
+                    //        url: "~/User/Delete",
+                    //        data: {UserID:celldata},
+                    //        dataType: "json",
+                    //        success: function (data) {
+                    //            //判断后台是否删除成功
+                    //            //如果成功则调用jqGrid的delRowData方法逐个删除行id
+                    //            if(data.success==1){
+                    //                for (var i = 0; i < len; i++) {
+                    //                    $("#grid-pager").jqGrid("delRowData", selectedRowIds[0],{reloadAfterSubmit:false});
+                    //                }
+                    //            }
+                    //        }
+                    //    });
+
+                    //},
+                    onClick: function (e) {
+                        alert(1);
+                    }
+                },
+                {
+                    //search form
+                   // url: '/User/ManagerEdit',
+                    url: '@Url.Content("~/User/ManagerEdit")',
+                    mtype: 'POST',
+                    recreateForm: true,
+                    afterShowSearch: function (e) {
+                        var form = $(e[0]);
+                        form.closest('.ui-jqdialog').find('.ui-jqdialog-title').wrap('<div class="widget-header" />')
+                        style_search_form(form);
+                    },
+                    afterRedraw: function () {
+                        style_search_filters($(this));
+                    }
+                    ,
+                    multipleSearch: true,
+                    closeAfterSearch: true,
+                    /**
+                    multipleGroup:true,
+                    showQuery: true
+                    */
+                },
+                {
+                    //view record form
+                    recreateForm: true,
+                    beforeShowForm: function (e) {
+                        var form = $(e[0]);
+                        form.closest('.ui-jqdialog').find('.ui-jqdialog-title').wrap('<div class="widget-header" />')
+                    }
+                }
+            )
+            //.jqGrid('navButtonAdd',pager_selector,{              //原为).jqgrid
+            //        buttonicon:'icon-globe purple',
+            //        caption:'',
+            //        position:'last',
+            //        title:'查看历史记录',
+            //        onClickButton:function(){
+            //            //获得某行id
+            //            var gr = jQuery("#grid-table").jqGrid('getGridParam', 'selrow');
+            //            //获得某行数据
+            //            var grr = jQuery("#grid-table").jqGrid('getRowData',gr);
+            //            if (gr != null) {
+            //                var diag = new Dialog();
+            //                diag.Width = 600;
+            //                diag.Height = 300;
+            //                diag.Title = "历史数据展示";
+            //                diag.URL = "~/left.html?id="+gr;
+            //                diag.OKEvent = function(){diag.close();};//点击确定后调用的方法
+            //                diag.show();
+
+            //            }
+            //            else alert("Please Select Row");
+
+            //        }
+            //    }).jqGrid('navButtonAdd',pager_selector,{
+            //        buttonicon:'icon-eye-open',
+            //        caption:'',
+            //        position:'last',
+            //        title:'表单验证',
+            //        onClickButton:function(){
+            //            debugger;
+            //            //获得某行id
+            //            var gr = jQuery("#grid-table").jqGrid('getGridParam', 'selrow');
+            //            //获得某行数据
+            //            var grr = jQuery("#grid-table").jqGrid('getRowData',gr);
+            //            if (gr != null) {
+            //                var diag = new Dialog();
+            //                diag.Width = 600;
+            //                diag.Height = 300;
+            //                diag.Title = "表单验证";
+            //                diag.URL = "~/form.html";
+            //                diag.OKEvent = function(){diag.close();};//点击确定后调用的方法
+            //                diag.show();
+
+            //            }
+            //            else alert("Please Select Row");
+
+            //        }
+            //    })
+
+            function style_edit_form(form) {
+                //enable datepicker on "sdate" field and switches for "stock" field
+                form.find('input[name=sdate]').datepicker({ format: 'yyyy-mm-dd', autoclose: true })
+
+                form.find('input[name=stock]').addClass('ace ace-switch ace-switch-5').after('<span class="lbl"></span>');
+                //don't wrap inside a label element, the checkbox value won't be submitted (POST'ed)
+                //.addClass('ace ace-switch ace-switch-5').wrap('<label class="inline" />').after('<span class="lbl"></span>');
+
+
+                //update buttons classes
+                var buttons = form.next().find('.EditButton .fm-button');
+                buttons.addClass('btn btn-sm').find('[class*="-icon"]').hide();//ui-icon, s-icon
+                buttons.eq(0).addClass('btn-primary').prepend('<i class="ace-icon fa fa-check"></i>');
+                buttons.eq(1).prepend('<i class="ace-icon fa fa-times"></i>')
+
+                buttons = form.next().find('.navButton a');
+                buttons.find('.ui-icon').hide();
+                buttons.eq(0).append('<i class="ace-icon fa fa-chevron-left"></i>');
+                buttons.eq(1).append('<i class="ace-icon fa fa-chevron-right"></i>');
+            }
+
+            function style_delete_form(form) {
+                var buttons = form.next().find('.EditButton .fm-button');
+                buttons.addClass('btn btn-sm btn-white btn-round').find('[class*="-icon"]').hide();//ui-icon, s-icon
+                buttons.eq(0).addClass('btn-danger').prepend('<i class="ace-icon fa fa-trash-o"></i>');
+                buttons.eq(1).addClass('btn-default').prepend('<i class="ace-icon fa fa-times"></i>')
+            }
+
+            function style_search_filters(form) {
+                form.find('.delete-rule').val('X');
+                form.find('.add-rule').addClass('btn btn-xs btn-primary');
+                form.find('.add-group').addClass('btn btn-xs btn-success');
+                form.find('.delete-group').addClass('btn btn-xs btn-danger');
+            }
+            function style_search_form(form) {
+                var dialog = form.closest('.ui-jqdialog');
+                var buttons = dialog.find('.EditTable')
+                buttons.find('.EditButton a[id*="_reset"]').addClass('btn btn-sm btn-info').find('.ui-icon').attr('class', 'ace-icon fa fa-retweet');
+                buttons.find('.EditButton a[id*="_query"]').addClass('btn btn-sm btn-inverse').find('.ui-icon').attr('class', 'ace-icon fa fa-comment-o');
+                buttons.find('.EditButton a[id*="_search"]').addClass('btn btn-sm btn-purple').find('.ui-icon').attr('class', 'ace-icon fa fa-search');
+            }
+
+            function beforeDeleteCallback(e) {
+                var form = $(e[0]);
+                if (form.data('styled')) return false;
+
+                form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
+                style_delete_form(form);
+
+                form.data('styled', true);
+            }
+
+            function beforeEditCallback(e) {
+                var form = $(e[0]);
+                form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
+                style_edit_form(form);
+            }
+
+
+
+            //it causes some flicker when reloading or navigating grid
+            //it may be possible to have some custom formatter to do this as the grid is being created to prevent this
+            //or go back to default browser checkbox styles for the grid
+            function styleCheckbox(table) {
+                /**
+                    $(table).find('input:checkbox').addClass('ace')
+                    .wrap('<label />')
+                    .after('<span class="lbl align-top" />')
+
+
+                    $('.ui-jqgrid-labels th[id*="_cb"]:first-child')
+                    .find('input.cbox[type=checkbox]').addClass('ace')
+                    .wrap('<label />').after('<span class="lbl align-top" />');
+                */
+            }
+
+
+            //unlike navButtons icons, action icons in rows seem to be hard-coded
+            //you can change them like this in here if you want
+            function updateActionIcons(table) {
+                /**
+                var replacement =
+                {
+                    'ui-ace-icon fa fa-pencil' : 'ace-icon fa fa-pencil blue',
+                    'ui-ace-icon fa fa-trash-o' : 'ace-icon fa fa-trash-o red',
+                    'ui-icon-disk' : 'ace-icon fa fa-check green',
+                    'ui-icon-cancel' : 'ace-icon fa fa-times red'
+                };
+                $(table).find('.ui-pg-div span.ui-icon').each(function(){
+                    var icon = $(this);
+                    var $class = $.trim(icon.attr('class').replace('ui-icon', ''));
+                    if($class in replacement) icon.attr('class', 'ui-icon '+replacement[$class]);
+                })
+                */
+            }
+
+            //replace icons with FontAwesome icons like above
+            function updatePagerIcons(table) {
+                var replacement =
+                {
+                    'ui-icon-seek-first': 'ace-icon fa fa-angle-double-left bigger-140',
+                    'ui-icon-seek-prev': 'ace-icon fa fa-angle-left bigger-140',
+                    'ui-icon-seek-next': 'ace-icon fa fa-angle-right bigger-140',
+                    'ui-icon-seek-end': 'ace-icon fa fa-angle-double-right bigger-140'
+                };
+                $('.ui-pg-table:not(.navtable) > tbody > tr > .ui-pg-button > .ui-icon').each(function () {
+                    var icon = $(this);
+                    var $class = $.trim(icon.attr('class').replace('ui-icon', ''));
+
+                    if ($class in replacement) icon.attr('class', 'ui-icon ' + replacement[$class]);
+                })
+            }
+
+            function enableTooltips(table) {
+                $('.navtable .ui-pg-button').tooltip({ container: 'body' });
+                $(table).find('.ui-pg-div').tooltip({ container: 'body' });
+            }
+
+            //var selr = jQuery(grid_selector).jqGrid('getGridParam','selrow');
+
+            $(document).one('ajaxloadstart.page', function (e) {
+                $.jgrid.gridDestroy(grid_selector);
+                $('.ui-jqdialog').remove();
+            });
+        });
+    </script>
+   
+    
+</body>
+</html>
